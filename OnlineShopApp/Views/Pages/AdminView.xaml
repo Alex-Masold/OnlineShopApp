@@ -1,0 +1,1073 @@
+﻿<Page x:Class="OnlineShop.Views.Pages.AdminView"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:local="clr-namespace:OnlineShop.Views.Pages"
+      mc:Ignorable="d"
+      d:DesignHeight="450"
+      d:DesignWidth="800"
+      Title="AdminView">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="79*" />
+            <ColumnDefinition Width="81*" />
+        </Grid.ColumnDefinitions>
+        <TabControl Margin="15,15,15,15"
+                    Background="#FF313131"
+                    TabStripPlacement="Left"
+                    Grid.ColumnSpan="2">
+
+            <TabItem Header="TYPES PRODUCT">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding TypesProducts}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id" />
+                                                <ComboBox >
+                                                    <CheckBox/>
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdTypeProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Name">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Name" />
+                                                <ComboBox >
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding NameTypeProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="IdCategory">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Category" />
+                                                <ComboBox >
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdCategoryNavigation.NameCategory}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="CATEGORIES">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding Categories}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id" />
+                                                <ComboBox >
+                                                    <CheckBox/>
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdCategory}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Name">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Name" />
+                                                <ComboBox >
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding NameCategory}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="CUSTOMERS">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding Customers}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdCustomer}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Name">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Name" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding NameCustomer}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Family">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Family" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding FamilyCustomer}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Email">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Email" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding EmailCustomer}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="EMPLOYEES">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding Employees}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdEmployee}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Name">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Name" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding NameEmployee}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Family">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Family" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding FamilyEmployee}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Email">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Email" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding EmailEmployee}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Id Store">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id Store" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdStore}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Salary">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Salary" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding SalaryEmployee}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Is Delete">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Is Delete" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IsDelete}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="ORDERS">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding Orders}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdOrder}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Detail">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <ListView ItemsSource="{Binding OrderDetails}">
+                                                    <ListView.View>
+                                                        <GridView>
+                                                            <GridView.Columns>
+                                                                <GridViewColumn Header="Name"
+                                                                                DisplayMemberBinding="{Binding Path=IdDetail}" />
+                                                                <GridViewColumn Header="Family"
+                                                                                DisplayMemberBinding="{Binding Path=IdProduct}" />
+                                                                <GridViewColumn Header="Name"
+                                                                                DisplayMemberBinding="{Binding Path=CountProduct}" />
+                                                            </GridView.Columns>
+                                                        </GridView>
+                                                    </ListView.View>
+                                                </ListView>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Id Customer">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Customer" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdCustomerNavigation.NameCustomer}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Id Employee">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Employee" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdEmployeeNavigation.NameEmployee}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Date">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Date" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding DateOrder}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="ORDER DETAILS">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding OrderDetails}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdOrderNavigation.DateOrder}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Id Product">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id Product" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdProductNavigation.NameProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Count">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Count" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding CountProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="PRODUCTS">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding Products}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Name">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Name" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding NameProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Quantity">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Quantity" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding QuantityProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Id Provider">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Provider" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdProviderNavigation.NameProvider}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Rating">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Rating" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding RatingProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Id Type Product">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Type Product" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdTypeProductNavigation.NameTypeProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Price">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Price" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding PriceProduct}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="PROVIDERS">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding Providers}">
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Id" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding IdProvider}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Name">
+                                    <GridViewColumn.HeaderTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBox Text="Name" />
+                                                <ComboBox>
+                                                    <CheckBox />
+                                                </ComboBox>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.HeaderTemplate>
+
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBox IsReadOnly="True"
+                                                         Text="{Binding NameProvider}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+
+            <TabItem Header="STORES">
+                <DockPanel Margin="15">
+                    <Button DockPanel.Dock="Bottom"
+                            Content="Add"
+                            Margin="5" />
+                    <ListView DockPanel.Dock="Top"
+                              Background="#FF393939"
+                              Foreground="#FFC9C9C9"
+                              ItemsSource="{Binding Stores}">
+                        <ListView.View>
+                            <GridView>
+                                <GridView.Columns>
+                                    <GridViewColumn Header="Id">
+                                        <GridViewColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBox Text="Id" />
+                                                    <ComboBox>
+                                                        <CheckBox />
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.HeaderTemplate>
+
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBox IsReadOnly="True"
+                                                             Text="{Binding IdStore}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="City">
+                                        <GridViewColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBox Text="City" />
+                                                    <ComboBox>
+                                                        <CheckBox />
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.HeaderTemplate>
+
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBox IsReadOnly="True"
+                                                             Text="{Binding CityStore}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Street">
+                                        <GridViewColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBox Text="Street" />
+                                                    <ComboBox>
+                                                        <CheckBox />
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.HeaderTemplate>
+
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBox IsReadOnly="True"
+                                                             Text="{Binding StreetStore}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="House">
+                                        <GridViewColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBox Text="House" />
+                                                    <ComboBox>
+                                                        <CheckBox />
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.HeaderTemplate>
+
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBox IsReadOnly="True"
+                                                             Text="{Binding HouseStore}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Numder">
+                                        <GridViewColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBox Text="Numder" />
+                                                    <ComboBox>
+                                                        <CheckBox />
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.HeaderTemplate>
+
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBox IsReadOnly="True"
+                                                             Text="{Binding NumberStore}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Rating">
+                                        <GridViewColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBox Text="Rating" />
+                                                    <ComboBox>
+                                                        <CheckBox />
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.HeaderTemplate>
+
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBox IsReadOnly="True"
+                                                             Text="{Binding RatingStore}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Is Delete">
+                                        <GridViewColumn.HeaderTemplate>
+                                            <DataTemplate>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBox Text="Is Delete" />
+                                                    <ComboBox>
+                                                        <CheckBox />
+                                                    </ComboBox>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.HeaderTemplate>
+
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <TextBox IsReadOnly="True"
+                                                             Text="{Binding IsDelete}"/>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+
+                                    <GridViewColumn Header="Employees">
+                                        <GridViewColumn.CellTemplate>
+                                            <DataTemplate>
+                                                <StackPanel>
+                                                    <ListView ItemsSource="{Binding Employees}">
+                                                        <ListView.View>
+                                                            <GridView>
+                                                                <GridView.Columns>
+                                                                    <GridViewColumn Header="Name"
+                                                                                    DisplayMemberBinding="{Binding Path=NameEmployee}" />
+                                                                    <GridViewColumn Header="Family"
+                                                                                    DisplayMemberBinding="{Binding Path=FamilyEmployee}" />
+                                                                    <GridViewColumn Header="Name"
+                                                                                    DisplayMemberBinding="{Binding Path=SalaryEmployee}" />
+                                                                </GridView.Columns>
+                                                            </GridView>
+                                                        </ListView.View>
+                                                    </ListView>
+                                                </StackPanel>
+                                            </DataTemplate>
+                                        </GridViewColumn.CellTemplate>
+                                    </GridViewColumn>
+                                </GridView.Columns>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </DockPanel>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Page>
