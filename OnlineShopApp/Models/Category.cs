@@ -1,9 +1,10 @@
-﻿using System;
+﻿using OnlineShop.Models.Base;
+using System;
 using System.Collections.Generic;
 
 namespace OnlineShopApp.Models;
 
-public partial class Category
+public partial class Category : PropertyChange
 {
     public int IdCategory { get; set; }
 

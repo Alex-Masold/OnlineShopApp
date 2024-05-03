@@ -2,29 +2,15 @@
 using OnlineShop.Models.Base;
 using OnlineShop.Models.Data;
 using OnlineShopApp.Models;
+using System.Collections.ObjectModel;
 
 namespace OnlineShop.ViewModel
 {
     public class AdminViewModel : PropertyChange
     {
-        #region Типы Продуктов
-        private List<TypesProduct> typesProducts;
-        //private ObservableCollection<TypesProduct> typesProducts;
-        public List<TypesProduct> TypesProducts
-        {
-            get { return typesProducts; }
-            set
-            {
-                typesProducts = value;
-                OnPropertyChanged(nameof(TypesProducts));
-            }
-        }
-        #endregion
-
         #region Категории
-        private List<Category> categories;
-        //private ObservableCollection<Category> categories;
-        public List<Category> Categories
+        private ObservableCollection<Category> categories;
+        public ObservableCollection<Category> Categories
         { 
             get { return categories; }
             set 
@@ -35,24 +21,22 @@ namespace OnlineShop.ViewModel
         }
         #endregion
 
-        #region Клиенты
-        private List<Customer> customers;
-        //private ObservableCollection<Customer> customers;
-        public List<Customer> Customers
+        #region Типы Продуктов
+        private ObservableCollection<TypesProduct> typesProducts;
+        public ObservableCollection<TypesProduct> TypesProducts
         {
-            get { return customers; }
+            get { return typesProducts; }
             set
             {
-                customers = value;
-                OnPropertyChanged(nameof(Customers));
+                typesProducts = value;
+                OnPropertyChanged(nameof(TypesProducts));
             }
         }
         #endregion
 
         #region Сотрудники
-        private List<Employee> employees;
-        //private ObservableCollection<Employee> employees;
-        public List<Employee> Employees
+        private ObservableCollection<Employee> employees;
+        public ObservableCollection<Employee> Employees
         {
             get { return employees; }
             set
@@ -63,10 +47,35 @@ namespace OnlineShop.ViewModel
         }
         #endregion
 
+        #region Клиенты
+        private ObservableCollection<Customer> customers;
+        public ObservableCollection<Customer> Customers
+        {
+            get { return customers; }
+            set
+            {
+                customers = value;
+                OnPropertyChanged(nameof(Customers));
+            }
+        }
+        #endregion
+
+        #region Статусы Заказа
+        private ObservableCollection<OrderStatus> ordersStatuses;
+        public ObservableCollection<OrderStatus> OrdersStatuses
+        {
+            get { return ordersStatuses; }
+            set
+            {
+                ordersStatuses = value;
+                OnPropertyChanged(nameof(OrdersStatuses));
+            }
+        }
+        #endregion
+
         #region Заказы
-        private List<Order> orders;
-        //private ObservableCollection<Order> orders;
-        public List<Order> Orders
+        private ObservableCollection<Order> orders;
+        public ObservableCollection<Order> Orders
         {
             get { return orders; }
             set
@@ -78,9 +87,8 @@ namespace OnlineShop.ViewModel
         #endregion
 
         #region Детали Заказа
-        private List<OrderDetail> orderDetails;
-        //private ObservableCollection<OrderDetail> orderDetails;
-        public List<OrderDetail> OrderDetails
+        private ObservableCollection<OrderDetail> orderDetails;
+        public ObservableCollection<OrderDetail> OrderDetails
         {
             get { return orderDetails; }
             set
@@ -91,24 +99,10 @@ namespace OnlineShop.ViewModel
         }
         #endregion
 
-        #region Продукты
-        private List<Product> products;
-        //private ObservableCollection<Product> products;
-        public List<Product> Products
-        {
-            get { return products; }
-            set
-            {
-                products = value;
-                OnPropertyChanged(nameof(Products));
-            }
-        }
-        #endregion
-
         #region Поставщики
-        private List<Provider> providers;
+        private ObservableCollection<Provider> providers;
         //private ObservableCollection<Provider> providers;
-        public List<Provider> Providers
+        public ObservableCollection<Provider> Providers
         {
             get { return providers; }
             set
@@ -119,10 +113,23 @@ namespace OnlineShop.ViewModel
         }
         #endregion
 
+        #region Продукты
+        private ObservableCollection<Product> products;
+        public ObservableCollection<Product> Products
+        {
+            get { return products; }
+            set
+            {
+                products = value;
+                OnPropertyChanged(nameof(Products));
+            }
+        }
+        #endregion
+
         #region Магазины
-        private List<Store> stores;
+        private ObservableCollection<Store> stores;
         //private ObservableCollection<Store> stores;
-        public List<Store> Stores
+        public ObservableCollection<Store> Stores
         {
             get { return stores; }
             set
@@ -133,7 +140,29 @@ namespace OnlineShop.ViewModel
         }
         #endregion
 
+        private object selectedItem;
+        public object SelectedItem
+        {
+            get { return selectedItem; }
+            set
+            {
+                selectedItem = value;
+                OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
 
+        private RelayCommand selectionChangedTypeProduct;
+        public RelayCommand SelectionChangedTypeProduct
+        {
+            get
+            {
+                return selectionChangedTypeProduct ?? (selectionChangedTypeProduct = new RelayCommand(obj =>
+                {
+                    
+                        
+                }));
+            }
+        }
 
         public AdminViewModel()
         {
@@ -146,6 +175,8 @@ namespace OnlineShop.ViewModel
             Employees =     StaticData.GetAllEmployees();
 
             Orders =        StaticData.GetAllOrders();
+
+            OrdersStatuses = StaticData.GetAllOrderStatuses();
 
             OrderDetails =  StaticData.GetAllOrderDetails();
 

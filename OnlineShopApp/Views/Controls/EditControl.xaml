@@ -1,0 +1,687 @@
+﻿<UserControl x:Class="OnlineShopApp.Views.Controls.EditControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:OnlineShopApp.Views.Controls.Templates"
+             xmlns:parent="clr-namespace:OnlineShop.Views.Pages" 
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="CategoryTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранная Категория"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdCategory, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9"
+                               Margin="5,5,5,5" />
+                </WrapPanel>
+
+                <Label Content="Название"
+                       Target="{Binding ElementName=Name}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Name"
+                         Text="{Binding NameCategory, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TypeProductTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранная Книга"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdTypeProduct, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9"
+                               Margin="5,5,5,5" />
+                </WrapPanel>
+
+                <Label Content="Название"
+                       Target="{Binding ElementName=Name}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Name"
+                         Text="{Binding NameTypeProduct, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <Label Content="Категория"
+                       Target="{Binding ElementName=CategoryComboBox}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <ComboBox x:Name="CategoryComboBox"
+                          ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                          SelectedItem="{Binding IdCategoryNavigation}"
+                          SelectedValuePath="IdCategory"
+                          Margin="5,5,5,5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NameCategory}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CustomerTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранный Покупатель"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdCustomer, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9"
+                               Margin="5,5,5,5" />
+                </WrapPanel>
+
+                <Label Content="Имя"
+                       Target="{Binding ElementName=Name}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Name"
+                         Text="{Binding NameCustomer, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <Label Content="Фамилия"
+                       Target="{Binding ElementName=Family}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Family"
+                         Text="{Binding FamilyCustomer, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <Label Content="Email"
+                       Target="{Binding ElementName=Email}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Email"
+                         Text="{Binding EmailCustomer, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <Label Content="Пароль"
+                       Target="{Binding ElementName=Password}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Password"
+                         Text="{Binding PasswordCustomer, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <ListView DockPanel.Dock="Top"
+                          Background="#393939"
+                          Foreground="#C9C9C9"
+                          ItemsSource="{Binding ObservableOrders}">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding IdCustomer}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Date">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding DateOrder}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Status">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding IdOrderStatusNavigation.Status}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Store">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding IdStore}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="EmployeeTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранная Книга"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdEmployee, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9"
+                               Margin="5,5,5,5" />
+                </WrapPanel>
+
+                <Label Content="Название"
+                       Target="{Binding ElementName=Name}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Name"
+                         Text="{Binding NameEmployee, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <Label Content="Фамилия"
+                       Target="{Binding ElementName=Family}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Family"
+                         Text="{Binding FamilyEmployee, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <Label Content="Email"
+                       Target="{Binding ElementName=Email}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Email"
+                         Text="{Binding EmailEmployee, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <Label Content="Пароль"
+                       Target="{Binding ElementName=Password}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Password"
+                         Text="{Binding PasswordEmployee, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+                <Label Content="Зарплата"
+                       Target="{Binding ElementName=Salary}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Salary"
+                         Text="{Binding SalaryEmployee, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+
+
+                <Label Content="Магазин"
+                       Target="{Binding ElementName=StoreComboBox}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <ComboBox x:Name="StoreComboBox"
+                          ItemsSource="{Binding DataContext.Stores, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                          Foreground="#C9C9C9"
+                          Margin="5,5,5,5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding StreetStore}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OrderStatusTemplate">
+            <StackPanel>
+                <TextBlock Foreground=" #C9C9C9"
+                           Text="Выбранный Статус"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdStatus, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9" />
+                </WrapPanel>
+
+                <Label Content="Название"
+                       Target="{Binding ElementName=Name}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Name"
+                         Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OrderTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранный Заказ"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdOrder}"
+                               Foreground=" #C9C9C9"
+                               VerticalAlignment="Center" />
+                    <Label Content="Статус"
+                           Target="{Binding ElementName=Status}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <ComboBox x:Name="Status"
+                              ItemsSource="{Binding DataContext.OrdersStatuses, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                              Margin="5,5,5,5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Name}" />
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Date :"
+                           Target="{Binding ElementName=Date}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Date"
+                               Text="{Binding DateOrder}"
+                               Foreground=" #C9C9C9"
+                               VerticalAlignment="Center" />
+                </WrapPanel>
+                <Label Content="Заказчик"
+                       Target="{Binding ElementName=CustomersComboBox}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <ComboBox x:Name="CustomersComboBox"
+                          ItemsSource="{Binding DataContext.Customers, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                          Margin="5,5,5,5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NameCustomer}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Пункт Выдачи"
+                       Target="{Binding ElementName=StoresComboBox}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <ComboBox x:Name="StoresComboBox"
+                          ItemsSource="{Binding DataContext.Stores, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                          Margin="5,5,5,5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Content="Выдаватель"
+                       Target="{Binding ElementName=EmployeeComboBox}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <ComboBox x:Name="EmployeeComboBox"
+                          ItemsSource="{Binding IdStoreNavigation.Employees}"
+                          Margin="5,5,5,5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <ListView DockPanel.Dock="Top"
+                          Background="#393939"
+                          Foreground="#C9C9C9"
+                          ItemsSource="{Binding ObservableOrderDetails}">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="Id">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding IdDetail}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Date">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding IdProductNavigation.Name}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+
+                                <GridViewColumn Header="Status">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <StackPanel>
+                                                <TextBlock Text="{Binding CountProduct}" />
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="OrderDetailTemplate">
+            <StackPanel>
+                <TextBlock Foreground=" #C9C9C9"
+                           Text="Выбранная Делать Заказа"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdDetail, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9" />
+                    <Label Content="Заказ :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <ComboBox x:Name="OrdersComboBox"
+                              ItemsSource="{Binding DataContext.Orders, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                              Margin="5,5,5,5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                </WrapPanel>
+                <WrapPanel>
+                    <Label Content="Продукты :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <ComboBox x:Name="ProductsComboBox"
+                              ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                              Margin="5,5,5,5">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Name}" />
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
+                    <TextBox x:Name="Count"
+                             Text="{Binding CountProduct}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             Margin="5,5,5,5" />
+                </WrapPanel>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ProviderTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранный Продавец"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdProvider, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9"
+                               Margin="5,5,5,5" />
+                </WrapPanel>
+
+                <Label Content="Название"
+                       Target="{Binding ElementName=Name}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Name"
+                         Text="{Binding NameProvider, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ProductTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранный Продавец"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdProduct, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9"
+                               Margin="5,5,5,5" />
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Название"
+                           Target="{Binding ElementName=Name}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBox x:Name="Name"
+                             Text="{Binding NameProduct, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             Margin="5,5,5,5" />
+                    <Label Content="Количество"
+                           Target="{Binding ElementName=Quantity}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBox x:Name="Quantity"
+                             Text="{Binding QuantityProduct, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             Margin="5,5,5,5" />
+                    <Label Content="Райтинг Продукта"
+                           Target="{Binding ElementName=Rating}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBox x:Name="Rating"
+                             Text="{Binding RatingProduct, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             Margin="5,5,5,5" />
+                    <Label Content="Цена"
+                           Target="{Binding ElementName=Price}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBox x:Name="Price"
+                             Text="{Binding PriceProduct, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             Margin="5,5,5,5" />
+                </WrapPanel>
+
+                <Label Content="Тип Продукта :"
+                       Target="{Binding ElementName=TypesProductsComboBox}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <ComboBox x:Name="TypesProductsComboBox"
+                          SelectedItem="{Binding SelectedItem.IdOrderNavigation}"
+                          ItemsSource="{Binding DataContext.TypesProducts, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                          Margin="5,5,5,5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NameTypeProduct}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+
+                <Label Content="Поставщик :"
+                       Target="{Binding ElementName=ProvidersComboBox}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <ComboBox x:Name="ProvidersComboBox"
+                          ItemsSource="{Binding DataContext.Providers, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                          Margin="5,5,5,5">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding NameProvider}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="StoreTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранный Продавец"
+                           Margin="5,5,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdProvider, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9"
+                               Margin="5,5,5,5" />
+                </WrapPanel>
+
+                <Label Content="Город"
+                       Target="{Binding ElementName=City}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="City"
+                         Text="{Binding CityStore, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+
+                <Label Content="Улица"
+                       Target="{Binding ElementName=Street}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Street"
+                         Text="{Binding StreetStore, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+
+                <WrapPanel>
+                    <Label Content="Дом"
+                           Target="{Binding ElementName=House}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBox x:Name="House"
+                             Text="{Binding HouseStore, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             Margin="5,5,5,5" />
+
+                    <Label Content="Номер Дома"
+                           Target="{Binding ElementName=House_Number}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <TextBox x:Name="House_Number"
+                             Text="{Binding NumberStore, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             Margin="5,5,5,5" />
+                </WrapPanel>
+                <Label Content="Райтинг Магазина"
+                       Target="{Binding ElementName=Rating}"
+                       Foreground="#C9C9C9"
+                       Margin="5,5,5,5" />
+                <TextBox x:Name="Rating"
+                         Text="{Binding RatingStore, UpdateSourceTrigger=PropertyChanged}"
+                         Foreground="#C9C9C9"
+                         Background="Transparent"
+                         Margin="5,5,5,5" />
+
+                <ListView ItemsSource="{Binding Employees}"
+                          Background="#393939"
+                          Foreground="#C9C9C9">
+                    <ListView.View>
+                        <GridView>
+                            <GridView.Columns>
+                                <GridViewColumn Header="Name"
+                                                DisplayMemberBinding="{Binding Path=NameEmployee}" />
+                                <GridViewColumn Header="Family"
+                                                DisplayMemberBinding="{Binding Path=FamilyEmployee}" />
+                                <GridViewColumn Header="Name"
+                                                DisplayMemberBinding="{Binding Path=SalaryEmployee}" />
+                            </GridView.Columns>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="HiddenTemplate">
+            <StackPanel Visibility="Collapsed" />
+        </DataTemplate>
+
+        <local:TemplateSelector x:Key="TypeTemplateSelector"
+                                Category="{StaticResource CategoryTemplate}"
+                                TypeProduct="{StaticResource TypeProductTemplate}"
+                                Customer="{StaticResource CustomerTemplate}"
+                                Employee="{StaticResource EmployeeTemplate}"
+                                OrderStatus="{StaticResource OrderStatusTemplate}"
+                                Order="{StaticResource OrderTemplate}"
+                                OrderDetail="{StaticResource OrderDetailTemplate}"
+                                Provider="{StaticResource ProviderTemplate}"
+                                Product="{StaticResource ProductTemplate}"
+                                Store="{StaticResource StoreTemplate}"
+                                Hidden="{StaticResource HiddenTemplate}" />
+    </UserControl.Resources>
+    
+    <ContentControl Content="{Binding SelectedItem}"
+                        ContentTemplateSelector="{StaticResource TypeTemplateSelector}" />
+</UserControl>

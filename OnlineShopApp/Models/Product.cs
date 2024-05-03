@@ -1,27 +1,105 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore.Metadata.Conventions;
+using OnlineShop.Models.Base;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace OnlineShopApp.Models;
 
-public partial class Product
+public partial class Product : PropertyChange
 {
-    public int IdProduct { get; set; }
+    [NotMapped]
+    private int idProduct;
+    public int IdProduct 
+    { 
+        get { return idProduct; }
+        set
+        {
+            idProduct = value;
+            OnPropertyChanged(nameof(IdProduct));
+        }
+    }
 
-    public string NameProduct { get; set; } = null!;
+    [NotMapped]
+    private string? nameProduct;
+    public string? NameProduct 
+    { 
+        get { return nameProduct; }
+        set 
+        { 
+            nameProduct = value;
+            OnPropertyChanged(nameof(NameProduct));
+        }
+    }
 
-    public int QuantityProduct { get; set; }
+    [NotMapped]
+    private int? quantityProduct;
+    public int? QuantityProduct 
+    { 
+        get { return quantityProduct; }
+        set
+        {
+            quantityProduct = value;
+            OnPropertyChanged(nameof(QuantityProduct));
+        }
+    }
 
-    public int IdProvider { get; set; }
+    [NotMapped]
+    private int? idProvider;
+    public int? IdProvider 
+    { 
+        get { return idProvider; }
+        set
+        {
+            idProvider = value;
+            OnPropertyChanged(nameof(IdProvider));
+        }
+    }
 
-    public double? RatingProduct { get; set; }
+    [NotMapped]
+    private double? ratingProduct;
+    public double? RatingProduct 
+    { 
+        get { return  ratingProduct; }
+        set
+        {
+            ratingProduct = value;
+            OnPropertyChanged(nameof(RatingProduct));
+        }
+    }
 
-    public int IdTypeProduct { get; set; }
+    [NotMapped]
+    private int? idTypeProduct;
+    public int? IdTypeProduct 
+    { 
+        get { return idTypeProduct; }
+        set
+        {
+            idTypeProduct = value;
+            OnPropertyChanged(nameof(IdTypeProduct));
+        }
+    }
 
-    public int? PriceProduct { get; set; }
+    [NotMapped]
+    private int? priceProduct;
+    public int? PriceProduct 
+    { 
+        get { return priceProduct; }
+        set
+        {
+            priceProduct = value;
+            OnPropertyChanged(nameof(PriceProduct));
+        }
+    }
 
     public virtual Provider IdProviderNavigation { get; set; } = null!;
 
     public virtual TypesProduct IdTypeProductNavigation { get; set; } = null!;
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+    public string Name {  get { return IdTypeProductNavigation.NameTypeProduct + ' ' + NameProduct; } }
+    [NotMapped]
+    public ObservableCollection<OrderDetail> ObservableOrderDetails { get { return new ObservableCollection<OrderDetail>(OrderDetails); } }
+
 }

@@ -5,6 +5,7 @@ using OnlineShop.Views.Pages;
 using OnlineShopApp.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Security.Permissions;
 using System.Text;
@@ -36,55 +37,18 @@ namespace OnlineShop.ViewModel
             }
         }
 
-        private List<Customer> customers = StaticData.GetAllCustomers();
-        private List<Employee> employees = StaticData.GetAllEmployees();
-
         private Employee currentEmployee;
         private Customer currentCustomers;
 
-        private void Check(string email, string password)
+        private void Check()
         {
             if (email.Contains("@store"))
             {
-                foreach (var employee in employees)
-                {
-                    if ( (email == employee.EmailEmployee) && (password == employee.PasswordEmployee))
-                    {
-                        currentEmployee = employee;
-                    }
-                    else
-                    {
-                        if (email != employee.EmailEmployee) 
-                        { 
-                            Email = "Не верный Email";
-                        }
-                        if (password != employee.PasswordEmployee)
-                        {
-                            Password = "Не верный пароль";
-                        }
-                    }
-                }
+                currentEmployee = StaticData.GetEmployee(Email, Password);
             }
             else
             {
-                foreach(var customer in customers)
-                {
-                    if ((email == customer.EmailCustomer) && (password == customer.PasswordCustomer))
-                    {
-                        currentCustomers = customer;
-                    }
-                    else
-                    {
-                        if (email != customer.EmailCustomer)
-                        {
-                            Email = "Не верный Email";
-                        }
-                        if (password != customer.PasswordCustomer)
-                        {
-                            Password = "Не верный пароль";
-                        }
-                    }
-                }
+                currentCustomers = StaticData.GetCustomer(Email, Password);
             }
         }
 
@@ -95,7 +59,7 @@ namespace OnlineShop.ViewModel
             {
                 return logInCommand ?? (logInCommand = new RelayCommand(obj =>
                 {
-                    Check(Email, Password);
+                    Check();
 
                     if (currentCustomers != null)
                     {
@@ -118,8 +82,10 @@ namespace OnlineShop.ViewModel
 
         public AuthorizationViewModel()
         {
-            Email = "ivan.petrov@gmail.com";
-            Password = "p@ssw0rd1!";
+            //Email = "ivan.petrov@gmail.com";
+            //Password = "p@ssw0rd1!"; 
+            Email = "";
+            Password = "";
         }
     }
 }
