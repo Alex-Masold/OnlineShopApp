@@ -11,13 +11,49 @@ public partial class Customer : PropertyChange
 {
     public int IdCustomer { get; set; }
 
-    public string? NameCustomer { get; set; }
+    private string? nameCustomer;
+    public string? NameCustomer 
+    { 
+        get { return nameCustomer; }
+        set
+        {
+            nameCustomer = value;
+            OnPropertyChanged(nameof(NameCustomer));
+        }
+    }
 
-    public string? FamilyCustomer { get; set; }
+    private string? familyCustomer;
+    public string? FamilyCustomer 
+    { 
+        get { return familyCustomer; }
+        set
+        {
+            familyCustomer = value;
+            OnPropertyChanged(nameof(FamilyCustomer));
+        }
+    }
 
-    public string? EmailCustomer { get; set; }
+    private string? emailCustomer;
+    public string? EmailCustomer 
+    { 
+        get { return emailCustomer; }
+        set
+        {
+            emailCustomer = value;
+            OnPropertyChanged(nameof(EmailCustomer));
+        }
+    }
 
-    public string? PasswordCustomer { get; set; }
+    private string? passwordCustomer;
+    public string? PasswordCustomer 
+    { 
+        get { return  passwordCustomer; }
+        set
+        {
+            passwordCustomer = value;
+            OnPropertyChanged(nameof(PasswordCustomer));
+        }
+    }
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 

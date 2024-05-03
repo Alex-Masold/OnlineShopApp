@@ -9,11 +9,61 @@ namespace OnlineShopApp.Models;
 public partial class Order : PropertyChange
 {
     public int IdOrder { get; set; }
-    public int? IdCustomer { get; set; }
-    public DateOnly? DateOrder { get; set; }
-    public int? IdOrderStatus { get; set; }
-    public int? IdStore { get; set; }
-    public int? IdEmployee { get; set; }
+
+    private DateOnly? dateOrder;
+    public DateOnly? DateOrder 
+    { 
+        get { return dateOrder; }
+        set
+        {
+            dateOrder = value;
+            OnPropertyChanged(nameof(DateOrder));
+        }
+    }
+
+    private int? idCustomer;
+    public int? IdCustomer 
+    {
+        get { return idCustomer; }
+        set
+        {
+            idCustomer = value;
+            OnPropertyChanged(nameof(IdCustomer));
+        }
+    }
+
+    private int? idOrderStatus;
+    public int? IdOrderStatus 
+    { 
+        get {  return idOrderStatus; }
+        set
+        {
+            idOrderStatus = value;
+            OnPropertyChanged(nameof(IdOrderStatus));
+        }
+    }
+
+    private int? idStore;
+    public int? IdStore 
+    { 
+        get { return idStore; }
+        set
+        {
+            IdStore = value;
+            OnPropertyChanged(nameof(IdStore));
+        }
+    }
+
+    private int? idEmployee;
+    public int? IdEmployee 
+    {
+        get { return idEmployee; }
+        set
+        {
+            idEmployee = value;
+            OnPropertyChanged(nameof(IdEmployee));
+        }
+    }
 
     public virtual Customer? IdCustomerNavigation { get; set; } = null!;
     public virtual OrderStatus? IdOrderStatusNavigation { get; set; } = null!;

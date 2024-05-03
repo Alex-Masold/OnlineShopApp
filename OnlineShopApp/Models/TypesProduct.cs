@@ -10,9 +10,27 @@ public partial class TypesProduct : PropertyChange
 {
     public int IdTypeProduct { get; set; }
 
-    public string? NameTypeProduct { get; set; } = null!;
+    private string? nameTypesProduct;
+    public string? NameTypeProduct 
+    { 
+        get {  return nameTypesProduct; }
+        set
+        {
+            nameTypesProduct = value;
+            OnPropertyChanged(nameof(NameTypeProduct));
+        }
+    }
 
-    public int? IdCategory { get; set; }
+    private int? idCategory;
+    public int? IdCategory 
+    { 
+        get { return idCategory; }
+        set
+        {
+            idCategory = value;
+            OnPropertyChanged(nameof(IdCategory));
+        }
+    }
 
     public virtual Category IdCategoryNavigation { get; set; } = null!;
 

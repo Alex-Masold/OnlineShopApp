@@ -14,7 +14,17 @@ public class OrderStatus : PropertyChange
 {
     [Key]
     public int IdStatus { get; set; }
-    public string? Status { get; set; }
+
+    private string? status;
+    public string? Status 
+    { 
+        get { return status; }
+        set
+        {
+            status = value;
+            OnPropertyChanged(nameof(Status));
+        }
+    }
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
     [NotMapped]

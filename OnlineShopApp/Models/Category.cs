@@ -8,7 +8,16 @@ public partial class Category : PropertyChange
 {
     public int IdCategory { get; set; }
 
-    public string? NameCategory { get; set; }
+    private string? nameCategory;
+    public string? NameCategory 
+    { 
+        get {  return nameCategory; }
+        set
+        {
+            nameCategory = value;
+            OnPropertyChanged(nameof(NameCategory));
+        }
+    }
 
     public virtual ICollection<TypesProduct> TypesProducts { get; set; } = new List<TypesProduct>();
 }

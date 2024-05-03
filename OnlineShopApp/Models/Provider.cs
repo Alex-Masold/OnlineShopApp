@@ -8,7 +8,16 @@ public partial class Provider : PropertyChange
 {
     public int IdProvider { get; set; }
 
-    public string? NameProvider { get; set; } = null!;
+    private string? nameProvider;
+    public string? NameProvider 
+    { 
+        get { return nameProvider; }
+        set
+        {
+            nameProvider = value;
+            OnPropertyChanged(nameof(NameProvider));
+        }
+    }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

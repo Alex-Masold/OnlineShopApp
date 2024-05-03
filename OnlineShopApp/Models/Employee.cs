@@ -10,17 +10,72 @@ public partial class Employee : PropertyChange
 {
     public int IdEmployee { get; set; }
 
-    public string NameEmployee { get; set; } = null!;
+    private string? nameEmployee;
+    public string? NameEmployee 
+    { 
+        get { return nameEmployee; }
+        set
+        {
+            nameEmployee = value;
+            OnPropertyChanged(nameof(NameEmployee));
+        }
+    }
 
-    public string? FamilyEmployee { get; set; } = null!;
+    private string? familyEmployee;
+    public string? FamilyEmployee 
+    { 
+        get { return familyEmployee; }
+        set
+        {
+            familyEmployee = value;
+            OnPropertyChanged(nameof(FamilyEmployee));
+        }
+    }
 
-    public string EmailEmployee { get; set; } = null!;
+    private string? emailEmployee;
+    public string? EmailEmployee 
+    { 
+        get {  return emailEmployee; }
+        set
+        {
+            emailEmployee = value;
+            OnPropertyChanged(nameof(EmailEmployee));
+        }
+    }
 
-    public string? PasswordEmployee { get; set; }
+    private string? passwordEmployee;
+    public string? PasswordEmployee 
+    { 
+        get {  return passwordEmployee; }
+        set
+        {
+            passwordEmployee = value;
+            OnPropertyChanged(nameof(PasswordEmployee));
+        }
+    }
 
-    public int? IdStore { get; set; }
+    private int? salaryEmployee;
+    public int? SalaryEmployee
+    {
+        get { return salaryEmployee; }
+        set
+        {
+            salaryEmployee = value;
+            OnPropertyChanged(nameof(SalaryEmployee));
+        }
+    }
 
-    public int? SalaryEmployee { get; set; }
+    private int? idStore;
+    public int? IdStore 
+    { 
+        get { return idStore; }
+        set
+        {
+            idStore = value;
+            OnPropertyChanged(nameof(IdStore));
+        }
+    }
+
 
     public virtual Store? IdStoreNavigation { get; set; } = null!;
 
