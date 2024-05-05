@@ -83,5 +83,68 @@ public partial class Employee : PropertyChange
 
     public string Name { get { return FamilyEmployee + ' ' + NameEmployee; } }
 
+    [NotMapped]
+    private bool isEditName;
+    [NotMapped]
+    public bool IsEditName
+    {
+        get { return isEditName; }
+        set
+        {
+            isEditName = value;
+            OnPropertyChanged(nameof(IsEditName));
+        }
+    }
 
+    [NotMapped]
+    private bool isEditFamily;
+    [NotMapped]
+    public bool IsEditFamily
+    {
+        get { return isEditFamily; }
+        set
+        {
+            isEditFamily = value;
+            OnPropertyChanged(nameof(IsEditFamily));
+        }
+    }
+
+    [NotMapped]
+    private bool isEditEmail;
+    [NotMapped]
+    public bool IsEditEmail
+    {
+        get { return isEditEmail; }
+        set
+        {
+            isEditEmail = value;
+            OnPropertyChanged(nameof(IsEditEmail));
+        }
+    }
+
+    [NotMapped]
+    private bool isEditPassword;
+    [NotMapped]
+    public bool IsEditPassword
+    {
+        get { return isEditPassword; }
+        set
+        {
+            isEditPassword = value;
+            OnPropertyChanged(nameof(IsEditPassword));
+        }
+    }
+
+    [NotMapped]
+    private bool isEditSalary;
+    [NotMapped]
+    public bool IsEditSalary
+    {
+        get { return isEditSalary; }
+        set
+        {
+            isEditSalary = value;
+            OnPropertyChanged(nameof(IsEditSalary));
+        }
+    }
 }

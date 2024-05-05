@@ -32,6 +32,16 @@ public class OrderStatus : PropertyChange
 
     public string Name { get { return Status + ' ' + '(' + IdStatus + ')'; } }
 
-
-
+    [NotMapped]
+    private bool isEditStatus;
+    [NotMapped]
+    public bool IsEditStatus
+    {
+        get { return isEditStatus; }
+        set
+        {
+            isEditStatus = value;
+            OnPropertyChanged(nameof(IsEditStatus));
+        }
+    }
 }

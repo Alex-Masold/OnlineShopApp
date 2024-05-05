@@ -9,19 +9,8 @@ namespace OnlineShopApp.Models;
 
 public partial class Product : PropertyChange
 {
-    [NotMapped]
-    private int idProduct;
-    public int IdProduct 
-    { 
-        get { return idProduct; }
-        set
-        {
-            idProduct = value;
-            OnPropertyChanged(nameof(IdProduct));
-        }
-    }
+    public int IdProduct { get; set; }
 
-    [NotMapped]
     private string? nameProduct;
     public string? NameProduct 
     { 
@@ -33,7 +22,6 @@ public partial class Product : PropertyChange
         }
     }
 
-    [NotMapped]
     private int? quantityProduct;
     public int? QuantityProduct 
     { 
@@ -45,19 +33,6 @@ public partial class Product : PropertyChange
         }
     }
 
-    [NotMapped]
-    private int? idProvider;
-    public int? IdProvider 
-    { 
-        get { return idProvider; }
-        set
-        {
-            idProvider = value;
-            OnPropertyChanged(nameof(IdProvider));
-        }
-    }
-
-    [NotMapped]
     private double? ratingProduct;
     public double? RatingProduct 
     { 
@@ -69,19 +44,6 @@ public partial class Product : PropertyChange
         }
     }
 
-    [NotMapped]
-    private int? idTypeProduct;
-    public int? IdTypeProduct 
-    { 
-        get { return idTypeProduct; }
-        set
-        {
-            idTypeProduct = value;
-            OnPropertyChanged(nameof(IdTypeProduct));
-        }
-    }
-
-    [NotMapped]
     private int? priceProduct;
     public int? PriceProduct 
     { 
@@ -90,6 +52,28 @@ public partial class Product : PropertyChange
         {
             priceProduct = value;
             OnPropertyChanged(nameof(PriceProduct));
+        }
+    }
+
+    private int? idProvider;
+    public int? IdProvider 
+    { 
+        get { return idProvider; }
+        set
+        {
+            idProvider = value;
+            OnPropertyChanged(nameof(IdProvider));
+        }
+    }
+
+    private int? idTypeProduct;
+    public int? IdTypeProduct 
+    { 
+        get { return idTypeProduct; }
+        set
+        {
+            idTypeProduct = value;
+            OnPropertyChanged(nameof(IdTypeProduct));
         }
     }
 
@@ -102,4 +86,55 @@ public partial class Product : PropertyChange
     [NotMapped]
     public ObservableCollection<OrderDetail> ObservableOrderDetails { get { return new ObservableCollection<OrderDetail>(OrderDetails); } }
 
+    [NotMapped]
+    private bool isEditName;
+    [NotMapped]
+    public bool IsEditName
+    {
+        get { return isEditName; }
+        set
+        {
+            isEditName = value;
+            OnPropertyChanged(nameof(IsEditName));
+        }
+    }
+
+    [NotMapped]
+    private bool isEditQuantity;
+    [NotMapped]
+    public bool IsEditQuantity
+    {
+        get { return isEditQuantity; }
+        set
+        {
+            isEditQuantity = value;
+            OnPropertyChanged(nameof(IsEditQuantity));
+        }
+    }
+
+    [NotMapped]
+    private bool isEditRating;
+    [NotMapped]
+    public bool IsEditRating
+    {
+        get { return isEditRating; }
+        set
+        {
+            isEditRating = value;
+            OnPropertyChanged(nameof(IsEditRating));
+        }
+    }
+
+    [NotMapped]
+    private bool isEditPrice;
+    [NotMapped]
+    public bool IsEditPrice
+    {
+        get { return isEditPrice; }
+        set
+        {
+            isEditPrice = value;
+            OnPropertyChanged(nameof(IsEditPrice));
+        }
+    }
 }

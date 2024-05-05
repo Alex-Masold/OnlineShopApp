@@ -41,4 +41,17 @@ public partial class TypesProduct : PropertyChange
     {
         get { return new ObservableCollection<Product>(Products); }
     }
+
+    [NotMapped]
+    private bool isEditName;
+    [NotMapped]
+    public bool IsEditName
+    {
+        get { return isEditName; }
+        set
+        {
+            isEditName = value;
+            OnPropertyChanged(nameof(IsEditName));
+        }
+    }
 }

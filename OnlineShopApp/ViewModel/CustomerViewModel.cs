@@ -17,7 +17,7 @@ namespace OnlineShop.ViewModel
 {
     public class CustomerViewModel : PropertyChange
     {
-        private ObservableCollection<Product> products = new ObservableCollection<Product>(StaticData.GetAllProducts());
+        private ObservableCollection<Product> products;
         public ObservableCollection<Product> Products { 
             get { return products; } 
             set 
@@ -249,6 +249,7 @@ namespace OnlineShop.ViewModel
         public CustomerViewModel(Customer _customer)
         {
             Customer = _customer;
+            Products = StaticData.GetAllProducts();
             NewOrder = Customer.Orders.FirstOrDefault(_order => _order.IdOrderStatusNavigation.Status == "В корзине") ?? null;
         }
     }

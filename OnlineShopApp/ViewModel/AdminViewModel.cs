@@ -1,8 +1,14 @@
-﻿using OnlineShop.Models;
+﻿using Castle.Core.Resource;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualBasic.ApplicationServices;
+using OnlineShop.Models;
 using OnlineShop.Models.Base;
 using OnlineShop.Models.Data;
+using OnlineShopApp.DataSource;
 using OnlineShopApp.Models;
 using System.Collections.ObjectModel;
+using System.Windows;
+using System.Windows.Controls;
 
 namespace OnlineShop.ViewModel
 {
@@ -140,6 +146,10 @@ namespace OnlineShop.ViewModel
         }
         #endregion
 
+        private string oldString;
+        private int oldInt;
+        private double oldDouble;
+
         private object selectedItem;
         public object SelectedItem
         {
@@ -148,6 +158,380 @@ namespace OnlineShop.ViewModel
             {
                 selectedItem = value;
                 OnPropertyChanged(nameof(SelectedItem));
+            }
+        }
+
+        public void Change(string newVersion)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                if (newVersion == oldString)
+                {
+                    MessageBox.Show("Изменений нет");
+                }
+                else
+                {
+                    MessageBox.Show($"{oldString} -> {newVersion}");
+                    db.Entry(SelectedItem).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+                
+            }
+        }
+        public void Change(int newVersion)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                if (newVersion == oldInt)
+                {
+                    MessageBox.Show("Изменений нет");
+                }
+                else
+                {
+                    MessageBox.Show($"{oldString} -> {newVersion}");
+                    db.Entry(SelectedItem).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+        }
+        public void Change(double newVersion)
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                if (newVersion == oldDouble)
+                {
+                    MessageBox.Show("Изменений нет");
+                }
+                else
+                {
+                    MessageBox.Show($"{oldString} -> {newVersion}");
+                    db.Entry(SelectedItem).State = EntityState.Modified;
+                    db.SaveChanges();
+                }
+
+            }
+        }
+
+        public void Test(string newVersion)
+        {
+            if (newVersion == oldString)
+            {
+                MessageBox.Show("Изменений нет");
+            }
+            else
+            {
+                MessageBox.Show($"{oldString} -> {newVersion}");
+            }
+
+        }
+        public void Test(int newVersion)
+        {
+            if (newVersion == oldInt)
+            {
+                MessageBox.Show("Изменений нет");
+            }
+            else
+            {
+                MessageBox.Show($"{oldInt} -> {newVersion}");
+            }
+
+        }
+        public void Test(double newVersion)
+        {
+            if (newVersion == oldDouble)
+            {
+                MessageBox.Show("Изменений нет");
+            }
+            else
+            {
+                MessageBox.Show($"{oldDouble} -> {newVersion}");
+            }
+
+        }
+
+        private RelayCommand gotFocusCommand;
+        public RelayCommand GotFocusCommand
+        {
+            get
+            {
+                return gotFocusCommand ?? (gotFocusCommand = new RelayCommand(obj =>
+                {
+                    TextBox textBox = obj as TextBox;
+                    if (textBox != null)
+                    {
+                        textBox.FontSize *= 1.1;
+
+                        if (SelectedItem is Category)
+                        {
+                            Category category = (Category)SelectedItem;
+                            oldString = category.NameCategory;
+                        }
+                        else if (SelectedItem is TypesProduct)
+                        {
+                            TypesProduct typesProduct = (TypesProduct)SelectedItem;
+                            oldString = typesProduct.NameTypeProduct;
+                        }
+                        else if (SelectedItem is Customer)
+                        {
+                            Customer customer = (Customer)SelectedItem;
+                            if (textBox.Name == "Name")
+                            {
+                                oldString = customer.NameCustomer;
+                            }
+                            if (textBox.Name == "Family")
+                            {
+                                oldString = customer.FamilyCustomer;
+                            }
+                            if (textBox.Name == "Email")
+                            {
+                                oldString = customer.EmailCustomer;
+                            }
+                            if (textBox.Name == "Password")
+                            {
+                                oldString = customer.PasswordCustomer;
+                            }
+                        }
+                        else if (SelectedItem is Employee)
+                        {
+                            Employee employee = (Employee)SelectedItem;
+                            if (textBox.Name == "Name")
+                            {
+                                oldString = employee.NameEmployee;
+                            }
+                            else if (textBox.Name == "Family")
+                            {
+                                oldString = employee.FamilyEmployee;
+                            }
+                            else if (textBox.Name == "Email")
+                            {
+                                oldString = employee.EmailEmployee;
+                            }
+                            else if (textBox.Name == "Password")
+                            {
+                                oldString = employee.PasswordEmployee;
+                            }
+                            else if (textBox.Name == "Salary")
+                            {
+                                oldInt = (int)employee.SalaryEmployee;
+                            }
+                        }
+                        else if (SelectedItem is OrderStatus)
+                        {
+                            OrderStatus orderStatus = (OrderStatus)SelectedItem;
+                            oldString = orderStatus.Status;
+                        }
+                        else if (SelectedItem is OrderDetail)
+                        {
+                            OrderDetail orderDetail = (OrderDetail)SelectedItem;
+                            oldInt = (int)orderDetail.CountProduct;
+                        }
+                        else if (SelectedItem is Provider)
+                        {
+                            Provider provider = (Provider)SelectedItem;
+                            oldString = provider.NameProvider;
+                        }
+                        else if (SelectedItem is Product)
+                        {
+                            Product product = (Product)SelectedItem;
+                            if (textBox.Name == "Name")
+                            {
+                                oldString = product.NameProduct;
+                            }
+                            else if (textBox.Name == "Quantity")
+                            {
+                                oldInt = (int)product.QuantityProduct;
+                            }
+                            else if (textBox.Name == "Rating")
+                            {
+                                oldDouble = (double)product.RatingProduct;
+                            }
+                            else if (textBox.Name == "Price")
+                            {
+                                oldInt = (int)product.PriceProduct;
+                            }
+                        }
+                        else if (SelectedItem is Store)
+                        {
+                            Store store = (Store)SelectedItem;
+                            if (textBox.Name == "City")
+                            {
+                                oldString = store.CityStore;
+                            }
+                            else if (textBox.Name == "Street")
+                            {
+                                oldString = store.StreetStore;
+                            }
+                            else if (textBox.Name == "House")
+                            {
+                                oldString = store.HouseStore;
+                            }
+                            else if (textBox.Name == "House_Number")
+                            {
+                                oldString = store.NumberStore;
+                            }
+                            else if (textBox.Name == "Rating")
+                            {
+                                oldDouble = (double)store.RatingStore;
+                            }
+                        }
+                    }
+
+                }));
+            }
+        }
+
+        private RelayCommand lostFocusCommand;
+        public RelayCommand LostFocusCommand
+        {
+            get
+            {
+                return lostFocusCommand ?? (lostFocusCommand = new RelayCommand(obj =>
+                {
+                    TextBox textBox = obj as TextBox;
+                    if (textBox != null)
+                    {
+                        textBox.FontSize /= 1.1;
+
+                        if (SelectedItem is Category)
+                        {
+                            Category category = (Category)SelectedItem;
+                            //Test(textBox.Text);
+                            Change(textBox.Text);
+                        }
+                        else if (SelectedItem is TypesProduct)
+                        {
+                            TypesProduct typesProduct = (TypesProduct)SelectedItem;
+                            //Test(textBox.Text);
+                            Change(textBox.Text);
+                        }
+                        else if (SelectedItem is Customer)
+                        {
+                            Customer customer = (Customer)SelectedItem;
+                            if (textBox.Name == "Name")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Family")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Email")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Password")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                        }
+                        else if (SelectedItem is Employee)
+                        {
+                            Employee employee = (Employee)SelectedItem;
+                            if (textBox.Name == "Name")
+                            {
+                                //(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Family")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Email")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Password")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Salary")
+                            {
+                                //Test(Convert.ToInt32(textBox.Text));
+                                Change(Convert.ToInt32(textBox.Text));
+                            }
+                        }
+                        else if (SelectedItem is OrderStatus)
+                        {
+                            OrderStatus orderStatus = (OrderStatus)SelectedItem;
+                            //Test(textBox.Text);
+                            Change(textBox.Text);
+                        }
+                        else if (SelectedItem is OrderDetail)
+                        {
+                            OrderDetail orderDetail = (OrderDetail)SelectedItem;
+                            //Test(Convert.ToInt32(textBox.Text));
+                            Change(Convert.ToInt32(textBox.Text));
+                        }
+                        else if (SelectedItem is Provider)
+                        {
+                            Provider provider = (Provider)SelectedItem;
+                            //Test(textBox.Text);
+                            Change(textBox.Text);
+                        }
+                        else if (SelectedItem is Product)
+                        {
+                            Product product = (Product)SelectedItem;
+                            if (textBox.Name == "Name")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Quantity")
+                            {
+                                //Test(Convert.ToInt32(textBox.Text));
+                                Change(Convert.ToInt32(textBox.Text));
+                            }
+                            else if (textBox.Name == "Rating")
+                            {
+                                //Test(Convert.ToDouble(textBox.Text));
+                                Change(Convert.ToDouble(textBox.Text));
+                            }
+                            else if (textBox.Name == "Price")
+                            {
+                                //Test(Convert.ToInt32(textBox.Text));
+                                Change(Convert.ToInt32(textBox.Text));
+                            }
+                        }
+                        else if (SelectedItem is Store)
+                        {
+                            Store store = (Store)SelectedItem;
+                            if (textBox.Name == "City")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Street")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "House")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "House_Number")
+                            {
+                                //Test(textBox.Text);
+                                Change(textBox.Text);
+                            }
+                            else if (textBox.Name == "Rating")
+                            {
+                                //Test(Convert.ToDouble(textBox.Text));
+                                Change(Convert.ToDouble(textBox.Text));
+                            }
+                        }
+                    }
+
+                }));
             }
         }
 
