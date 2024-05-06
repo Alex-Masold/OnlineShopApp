@@ -84,8 +84,8 @@ namespace OnlineShop.ViewModel
         {
             //Email = "ivan.petrov@gmail.com";
             //Password = "p@ssw0rd1!"; 
-            Email = "";
-            Password = "";
+            Email = "ivan.petrov@store1.com";
+            Password = "!2dK@";
         }
     }
 }

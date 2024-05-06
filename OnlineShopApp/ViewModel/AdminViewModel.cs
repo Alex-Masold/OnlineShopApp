@@ -260,7 +260,7 @@ namespace OnlineShop.ViewModel
                     TextBox textBox = obj as TextBox;
                     if (textBox != null)
                     {
-                        textBox.FontSize *= 1.1;
+                        textBox.FontSize *= 1.2;
 
                         if (SelectedItem is Category)
                         {
@@ -391,7 +391,7 @@ namespace OnlineShop.ViewModel
                     TextBox textBox = obj as TextBox;
                     if (textBox != null)
                     {
-                        textBox.FontSize /= 1.1;
+                        textBox.FontSize /= 1.2;
 
                         if (SelectedItem is Category)
                         {

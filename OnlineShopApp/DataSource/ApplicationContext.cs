@@ -9,7 +9,8 @@ public partial class ApplicationContext : DbContext
 {
 	public ApplicationContext()
 	{
-	}
+        Database.EnsureCreated();
+    }
 
 	public ApplicationContext(DbContextOptions<ApplicationContext> options)
 		: base(options)
