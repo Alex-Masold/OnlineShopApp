@@ -77,64 +77,28 @@ public partial class Product : PropertyChange
         }
     }
 
-    public virtual Provider IdProviderNavigation { get; set; } = null!;
+    private Provider idProviderNavigation;
+    public virtual Provider IdProviderNavigation 
+    { 
+        get { return idProviderNavigation; }
+        set
+        {
+            idProviderNavigation = value;
+            OnPropertyChanged(nameof(IdProviderNavigation));
+        }
+    }
 
-    public virtual TypesProduct IdTypeProductNavigation { get; set; } = null!;
+    private TypesProduct idTypeProductNavigation;
+    public virtual TypesProduct IdTypeProductNavigation 
+    { 
+        get { return idTypeProductNavigation; }
+        set
+        {
+            idTypeProductNavigation = value;
+            OnPropertyChanged(nameof(IdTypeProductNavigation));
+        }
+    }
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
     public string Name {  get { return IdTypeProductNavigation.NameTypeProduct + ' ' + NameProduct; } }
-    [NotMapped]
-    public ObservableCollection<OrderDetail> ObservableOrderDetails { get { return new ObservableCollection<OrderDetail>(OrderDetails); } }
-
-    [NotMapped]
-    private bool isEditName;
-    [NotMapped]
-    public bool IsEditName
-    {
-        get { return isEditName; }
-        set
-        {
-            isEditName = value;
-            OnPropertyChanged(nameof(IsEditName));
-        }
-    }
-
-    [NotMapped]
-    private bool isEditQuantity;
-    [NotMapped]
-    public bool IsEditQuantity
-    {
-        get { return isEditQuantity; }
-        set
-        {
-            isEditQuantity = value;
-            OnPropertyChanged(nameof(IsEditQuantity));
-        }
-    }
-
-    [NotMapped]
-    private bool isEditRating;
-    [NotMapped]
-    public bool IsEditRating
-    {
-        get { return isEditRating; }
-        set
-        {
-            isEditRating = value;
-            OnPropertyChanged(nameof(IsEditRating));
-        }
-    }
-
-    [NotMapped]
-    private bool isEditPrice;
-    [NotMapped]
-    public bool IsEditPrice
-    {
-        get { return isEditPrice; }
-        set
-        {
-            isEditPrice = value;
-            OnPropertyChanged(nameof(IsEditPrice));
-        }
-    }
 }

@@ -27,21 +27,5 @@ public class OrderStatus : PropertyChange
     }
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    [NotMapped]
-    public ObservableCollection<Order> ObservableOrders { get { return new ObservableCollection<Order>(Orders); } }
-
     public string Name { get { return Status + ' ' + '(' + IdStatus + ')'; } }
-
-    [NotMapped]
-    private bool isEditStatus;
-    [NotMapped]
-    public bool IsEditStatus
-    {
-        get { return isEditStatus; }
-        set
-        {
-            isEditStatus = value;
-            OnPropertyChanged(nameof(IsEditStatus));
-        }
-    }
 }

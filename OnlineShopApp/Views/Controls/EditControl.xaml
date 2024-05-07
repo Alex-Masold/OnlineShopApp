@@ -26,96 +26,120 @@
                                VerticalAlignment="Center" />
                 </WrapPanel>
 
-                <Label Content="Название"
-                       Target="{Binding ElementName=Name}"
-                       Foreground="#C9C9C9"
-                       Margin="5,0,5,5" />
-                <TextBox x:Name="Name"
-                         Text="{Binding NameCategory, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,0"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}"/>
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
+                <WrapPanel>
+                    <Label Content="Название :"
+                           Target="{Binding ElementName=Name}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Name"
+                             Text="{Binding NameCategory, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+                
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="TypeProductTemplate">
             <StackPanel>
                 <TextBlock Foreground="#C9C9C9"
-                           Text="Выбранная Книга"
-                           Margin="5,5,5,5" />
+                           Text="Выбранный Тип Продукта"
+                           Margin="5,0,5,5" />
                 <WrapPanel>
                     <Label Content="Id :"
                            Target="{Binding ElementName=Id}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,0" />
                     <TextBlock x:Name="Id"
                                Text="{Binding IdTypeProduct, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="#C9C9C9"
-                               Margin="0,5,5,5"
-                               VerticalAlignment="Center" />
-                </WrapPanel>
-
-                <Label Content="Название"
-                       Target="{Binding ElementName=Name}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Name"
-                         Text="{Binding NameTypeProduct, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,0"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                <WrapPanel>
-                    <Label Content="Категория"
-                           Target="{Binding ElementName=CategoryCurrent}"
-                           Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
-                    <TextBlock x:Name="CategoryCurrent"  Text="{Binding IdCategoryNavigation.NameCategory}"
-                               Foreground="#C9C9C9"
-                               Margin="0,5,5,5"
-                               VerticalAlignment="Center" />
-                    <TextBlock x:Name="IdCategoryCurrent" Text="{Binding IdTypeProduct}"
-                               Foreground="#C9C9C9"
-                               Margin="0,5,5,5"
+                               Margin="0,0,5,0"
                                VerticalAlignment="Center" />
                 </WrapPanel>
                 
-                <ComboBox x:Name="CategoryComboBox"
-                          ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                          SelectedItem="{Binding IdCategoryNavigation}"
-                          SelectedValuePath="IdCategory"
-                          Margin="5,5,5,5">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding NameCategory}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                <WrapPanel>
+                    <Label Content="Название :"
+                           Target="{Binding ElementName=Name}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Name"
+                             Text="{Binding NameTypeProduct, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel x:Name="Category">
+                    <Label Content="Категория"
+                           Target="{Binding ElementName=CategoryComboBox}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <StackPanel>
+                        <WrapPanel x:Name="CurrentCategory">
+                            <!--<TextBlock x:Name="NameCategory"
+                                       Text="{Binding IdCategoryNavigation.NameCategory}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />-->
+                            <TextBlock x:Name="IdCategory"
+                                       Text="{Binding IdCategory}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />
+                        </WrapPanel>
+
+                        <!--TODO ComboBox-->
+                        <ComboBox x:Name="CategoryComboBox"
+                                  ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                  SelectedValue="{Binding IdCategory, Mode=TwoWay}"
+                                  SelectedValuePath="IdCategory"
+                                  Margin="0,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <WrapPanel>
+                                        <TextBlock Margin="0,0,5,0"
+                                                   Text="{Binding NameCategory}" />
+                                        <TextBlock Text="{Binding IdCategory}" />
+                                    </WrapPanel>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </WrapPanel>
+                
             </StackPanel>
         </DataTemplate>
 
@@ -123,112 +147,124 @@
             <StackPanel>
                 <TextBlock Foreground="#C9C9C9"
                            Text="Выбранный Покупатель"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                 <WrapPanel>
                     <Label Content="Id :"
                            Target="{Binding ElementName=Id}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,0" />
                     <TextBlock x:Name="Id"
                                Text="{Binding IdCustomer, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="#C9C9C9"
-                               Margin="0,5,5,5"
+                               Margin="0,0,5,0"
                                VerticalAlignment="Center" />
                 </WrapPanel>
 
-                <Label Content="Имя"
-                       Target="{Binding ElementName=Name}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Name"
-                         Text="{Binding NameCustomer, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,0"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                <Label Content="Фамилия"
-                       Target="{Binding ElementName=Family}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Family"
-                         Text="{Binding FamilyCustomer, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,0"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Family}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Family}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                <Label Content="Email"
-                       Target="{Binding ElementName=Email}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Email"
-                         Text="{Binding EmailCustomer, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,0"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Email}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Email}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                <Label Content="Пароль"
-                       Target="{Binding ElementName=Password}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Password"
-                         Text="{Binding PasswordCustomer, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Password}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Password}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
+                <WrapPanel>
+                    <Label Content="Имя :"
+                           Target="{Binding ElementName=Name}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Name"
+                             Text="{Binding NameCustomer, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Фамилия"
+                           Target="{Binding ElementName=Family}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Family"
+                             Text="{Binding FamilyCustomer, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Family}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Family}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Email"
+                           Target="{Binding ElementName=Email}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Email"
+                             Text="{Binding EmailCustomer, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Email}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Email}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Пароль"
+                           Target="{Binding ElementName=Password}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Password"
+                             Text="{Binding PasswordCustomer, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Password}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Password}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
                 <ListView DockPanel.Dock="Top"
                           Margin="5,5,5,5"
                           Background="#393939"
                           Foreground="#C9C9C9"
-                          ItemsSource="{Binding ObservableOrders}">
+                          ItemsSource="{Binding Orders}">
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
@@ -282,161 +318,183 @@
             <StackPanel>
                 <TextBlock Foreground="#C9C9C9"
                            Text="Выбранная Книга"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                 <WrapPanel>
                     <Label Content="Id :"
                            Target="{Binding ElementName=Id}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,0" />
                     <TextBlock x:Name="Id"
                                Text="{Binding IdEmployee, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="#C9C9C9"
-                               Margin="0,5,5,5"
+                               Margin="0,0,5,0"
                                VerticalAlignment="Center" />
                 </WrapPanel>
 
-                <Label Content="Название"
-                       Target="{Binding ElementName=Name}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Name"
-                         Text="{Binding NameEmployee, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                
-                <Label Content="Фамилия"
-                       Target="{Binding ElementName=Family}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Family"
-                         Text="{Binding FamilyEmployee, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Family}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Family}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                
-                <Label Content="Email"
-                       Target="{Binding ElementName=Email}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Email"
-                         Text="{Binding EmailEmployee, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Email}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Email}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-
-                <Label Content="Пароль"
-                       Target="{Binding ElementName=Password}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Password"
-                         Text="{Binding PasswordEmployee, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Password}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Password}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-                
-                <Label Content="Зарплата"
-                       Target="{Binding ElementName=Salary}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Salary"
-                         Text="{Binding SalaryEmployee, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Salary}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Salary}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
+                <WrapPanel>
+                    <Label Content="Имя :"
+                           Target="{Binding ElementName=Name}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Name"
+                             Text="{Binding NameEmployee, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
 
                 <WrapPanel>
+                    <Label Content="Фамилия :"
+                           Target="{Binding ElementName=Family}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Family"
+                             Text="{Binding FamilyEmployee, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Family}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Family}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Email"
+                           Target="{Binding ElementName=Email}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Email"
+                             Text="{Binding EmailEmployee, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Email}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Email}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Пароль"
+                           Target="{Binding ElementName=Password}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Password"
+                             Text="{Binding PasswordEmployee, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Password}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Password}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Зарплата"
+                           Target="{Binding ElementName=Salary}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Salary"
+                             Text="{Binding SalaryEmployee, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#CACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Salary}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Salary}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+
+                <WrapPanel x:Name="Store">
                     <Label Content="Магазин"
                            Target="{Binding ElementName=StoreComboBox}"
                            Foreground="#C9C9C9"
                            Margin="5,5,5,5" />
-                    <TextBlock x:Name="StoreCurrent"
-                               Text="{Binding IdStoreNavigation.Name}"
-                               Foreground="#C9C9C9"
-                               Margin="0,5,5,5"
-                               VerticalAlignment="Center" />
-                    <TextBlock x:Name="IdCategoryCurrent"
-                               Text="{Binding IdStore}"
-                               Foreground="#C9C9C9"
-                               Margin="0,5,5,5"
-                               VerticalAlignment="Center" />
+                    <StackPanel>
+                        <WrapPanel x:Name="CurrentStore">
+                            <!--<TextBlock x:Name="NameStore"
+                                       Text="{Binding IdStoreNavigation.Name}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />-->
+                            <TextBlock x:Name="IdStore"
+                                       Text="{Binding IdStore}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />
+                        </WrapPanel>
+
+                        <!--TODO ComboBox-->
+                        <ComboBox x:Name="StoreComboBox"
+                                  ItemsSource="{Binding DataContext.Stores, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                  SelectedValue="{Binding IdStore, Mode=TwoWay}"
+                                  SelectedValuePath="IdStore"
+                                  Margin="0,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=StoreComboBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding StreetStore}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
                 </WrapPanel>
-                
-                <ComboBox x:Name="StoreComboBox"
-                          ItemsSource="{Binding DataContext.Stores, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                          Foreground="#C9C9C9"
-                          Margin="5,5,5,5">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding StreetStore}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
             </StackPanel>
         </DataTemplate>
 
@@ -444,42 +502,43 @@
             <StackPanel>
                 <TextBlock Foreground=" #C9C9C9"
                            Text="Выбранный Статус"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                 <WrapPanel>
                     <Label Content="Id :"
                            Target="{Binding ElementName=Id}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,0" />
                     <TextBlock x:Name="Id"
                                Text="{Binding IdStatus, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="#C9C9C9"
-                               Margin="0,5,5,5"
+                               Margin="0,0,5,0"
                                VerticalAlignment="Center"/>
                 </WrapPanel>
 
-                <Label Content="Название"
-                       Target="{Binding ElementName=Name}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Name"
-                         Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-
+                <WrapPanel>
+                    <Label Content="Название"
+                           Target="{Binding ElementName=Name}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Name"
+                             Text="{Binding Status, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
             </StackPanel>
         </DataTemplate>
 
@@ -487,24 +546,49 @@
             <StackPanel>
                 <TextBlock Foreground="#C9C9C9"
                            Text="Выбранный Заказ"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                 <WrapPanel>
                     <Label Content="Id :"
                            Target="{Binding ElementName=Id}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,0" 
+                           VerticalAlignment="Center"/>
                     <TextBlock x:Name="Id"
                                Text="{Binding IdOrder}"
                                Foreground=" #C9C9C9"
-                               Margin="0,5,5,5"
+                               Margin="0,0,5,0"
                                VerticalAlignment="Center" />
-                    <Label Content="Статус"
-                           Target="{Binding ElementName=Status}"
-                           Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
-                    <ComboBox x:Name="Status"
+
+                    <WrapPanel x:Name="CurrnetStatus">
+                        <Label Content="Статус :"
+                               Target="{Binding ElementName=StatusComboBox}"
+                               Foreground="#C9C9C9"
+                               Margin="5,5,5,5" />
+
+                        <!--<TextBlock x:Name="NameStatus"
+                                   Text="{Binding IdOrderStatusNavigation.Status}"
+                                   Foreground="#C9C9C9"
+                                   Margin="0,5,5,5"
+                                   VerticalAlignment="Center" />-->
+                        <TextBlock x:Name="IdStatus"
+                                   Text="{Binding IdOrderStatus}"
+                                   Foreground="#C9C9C9"
+                                   Margin="0,5,5,5"
+                                   VerticalAlignment="Center" />
+                    </WrapPanel>
+
+                    <!--TODO ComboBox-->
+                    <ComboBox x:Name="StatusComboBox"
                               ItemsSource="{Binding DataContext.OrdersStatuses, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                              Margin="5,5,5,5">
+                              SelectedValue="{Binding IdOrderStatus, Mode=TwoWay}"
+                              SelectedValuePath="IdStatus"
+                              Margin="0,5,5,5">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
@@ -525,53 +609,134 @@
                                Foreground=" #C9C9C9"
                                VerticalAlignment="Center" />
                 </WrapPanel>
+
+                <WrapPanel x:Name="Customer">
+                    <Label Content="Заказчик"
+                           Target="{Binding ElementName=CustomersComboBox}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <StackPanel>
+                        <WrapPanel x:Name="CurrentCustomer">
+                            <TextBlock x:Name="NameCustomer"
+                                       Text="{Binding IdCustomerNavigation.Name}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />
+                            <TextBlock x:Name="IdCustomer"
+                                       Text="{Binding IdCustomer}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />
+                        </WrapPanel>
+
+                        <!--TODO ComboBox-->
+                        <ComboBox x:Name="CustomersComboBox"
+                                  ItemsSource="{Binding DataContext.Customers, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                  SelectedValue="{Binding IdCustomer, Mode=TwoWay}"
+                                  SelectedValuePath="IdCustomer"
+                                  Margin="0,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NameCustomer}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </WrapPanel>
+
                 
-                <Label Content="Заказчик"
-                       Target="{Binding ElementName=CustomersComboBox}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <ComboBox x:Name="CustomersComboBox"
-                          ItemsSource="{Binding DataContext.Customers, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                          Margin="5,5,5,5">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding NameCustomer}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                
-                <Label Content="Пункт Выдачи"
-                       Target="{Binding ElementName=StoresComboBox}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <ComboBox x:Name="StoresComboBox"
-                          ItemsSource="{Binding DataContext.Stores, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                          Margin="5,5,5,5">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-                
-                <Label Content="Выдаватель"
-                       Target="{Binding ElementName=EmployeeComboBox}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <ComboBox x:Name="EmployeeComboBox"
-                          ItemsSource="{Binding IdStoreNavigation.Employees}"
-                          Margin="5,5,5,5">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding Name}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                <WrapPanel x:Name="Store">
+                    <Label Content="Пункт Выдачи :"
+                           Target="{Binding ElementName=StoresComboBox}"
+                           Foreground="#C9C9C9"
+                           Margin="5,5,5,5" />
+                    <StackPanel>
+                        <WrapPanel x:Name="CurrentStore">
+                            <TextBlock x:Name="NameStore"
+                                       Text="{Binding IdStoreNavigation.Name}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,5,5,5"
+                                       VerticalAlignment="Center" />
+                            <TextBlock x:Name="IdStore"
+                                       Text="{Binding IdStore}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,5,5,5"
+                                       VerticalAlignment="Center" />
+                        </WrapPanel>
+
+                        <!--TODO ComboBox-->
+                        <ComboBox x:Name="StoresComboBox"
+                                  ItemsSource="{Binding DataContext.Stores, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                  SelectedValue="{Binding IdStore, Mode=TwoWay}"
+                                  SelectedValuePath="IdStore"
+                                  Margin="0,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </WrapPanel>
+
+
+                <WrapPanel x:Name="Employee">
+                    <Label Content="Выдаватель :"
+                           Target="{Binding ElementName=EmployeeComboBox}"
+                           Foreground="#C9C9C9"
+                           Margin="0,5,5,5" />
+                    <StackPanel>
+                        <WrapPanel x:Name="CurrentEmployee">
+                            <TextBlock x:Name="NameEmployee"
+                                       Text="{Binding IdEmployeeNavigation.Name}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,5,5,5"
+                                       VerticalAlignment="Center" />
+                            <TextBlock x:Name="IdEmployee"
+                                       Text="{Binding IdEmployee}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,5,5,5"
+                                       VerticalAlignment="Center" />
+                        </WrapPanel>
+
+                        <!--TODO ComboBox-->
+                        <ComboBox x:Name="EmployeeComboBox"
+                                  ItemsSource="{Binding IdStoreNavigation.Employees}"
+                                  SelectedValue="{Binding IdEmployee, Mode=TwoWay}"
+                                  SelectedValuePath="IdEmployee"
+                                  Margin="0,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </WrapPanel>
 
                 <ListView DockPanel.Dock="Top"
                           Background="#393939"
                           Foreground="#C9C9C9"
-                          ItemsSource="{Binding ObservableOrderDetails}">
+                          Margin="5,5,5,5"
+                          ItemsSource="{Binding OrderDetails}">
                     <ListView.View>
                         <GridView>
                             <GridView.Columns>
@@ -627,14 +792,30 @@
                                Foreground="#C9C9C9" 
                                Margin="0,5,5,5"
                                VerticalAlignment="Center"/>
-                    
+
                     <Label Content="Заказ :"
-                           Target="{Binding ElementName=Id}"
+                           Target="{Binding ElementName=OrdersComboBox}"
                            Foreground="#C9C9C9"
                            Margin="5,5,5,5" />
+
+                    <TextBlock x:Name="CurrentOrder"
+                               Text="{Binding IdOrder}"
+                               Foreground="#C9C9C9"
+                               Margin="0,5,5,5"
+                               VerticalAlignment="Center" />
+
+                    <!--TODO ComboBox-->
                     <ComboBox x:Name="OrdersComboBox"
                               ItemsSource="{Binding DataContext.Orders, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                              Margin="5,5,5,5">
+                              SelectedValue="{Binding IdOrder, Mode=TwoWay}"
+                              SelectedValuePath="IdOrder"
+                              Margin="0,5,5,5">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="SelectionChanged">
+                                <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=OrdersComboBox}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding Name}" />
@@ -645,36 +826,63 @@
                 
                 <WrapPanel>
                     <Label Content="Продукты :"
-                           Target="{Binding ElementName=Id}"
+                           Target="{Binding ElementName=ProductsComboBox}"
                            Foreground="#C9C9C9"
                            Margin="5,5,5,5" />
-                    <ComboBox x:Name="ProductsComboBox"
+                    <StackPanel>
+                        <WrapPanel x:Name="CurrentProduct">
+                            <TextBlock x:Name="NameProduct"
+                                       Text="{Binding IdProductNavigation.Name}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,5,5,5"
+                                       VerticalAlignment="Center" />
+                            <TextBlock x:Name="IdProduct"
+                                       Text="{Binding IdProduct}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,5,5,5"
+                                       VerticalAlignment="Center" />
+                        </WrapPanel>
+
+                        <!--TODO ComboBox-->
+                        <ComboBox x:Name="ProductsComboBox"
                               ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                              Margin="5,5,5,5">
-                        <ComboBox.ItemTemplate>
-                            <DataTemplate>
-                                <TextBlock Text="{Binding Name}" />
-                            </DataTemplate>
-                        </ComboBox.ItemTemplate>
-                    </ComboBox>
-                    <TextBox x:Name="Count"
-                             Text="{Binding CountProduct}"
-                             Foreground="#C9C9C9"
-                             Background="Transparent"
-                             SelectionBrush="#FFCACACA"
-                             Margin="5,0,5,5"
-                             Padding="5,5,5,5">
-                        <i:Interaction.Triggers>
-                            <i:EventTrigger EventName="GotFocus">
-                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                       CommandParameter="{Binding ElementName=Count}" />
-                            </i:EventTrigger>
-                            <i:EventTrigger EventName="LostFocus">
-                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                       CommandParameter="{Binding ElementName=Count}" />
-                            </i:EventTrigger>
-                        </i:Interaction.Triggers>
-                    </TextBox>
+                                  SelectedValue="{Binding IdProduct, Mode=TwoWay}"
+                                  SelectedValuePath="IdProduct"
+                                  Margin="0,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+
+                    <StackPanel x:Name="CountWrapper">
+                        <TextBox x:Name="Count"
+                                 Text="{Binding CountProduct}"
+                                 Foreground="#C9C9C9"
+                                 Background="Transparent"
+                                 SelectionBrush="#FFCACACA"
+                                 Margin="5,0,5,5"
+                                 Padding="5,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="GotFocus">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=Count}" />
+                                </i:EventTrigger>
+                                <i:EventTrigger EventName="LostFocus">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=Count}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                        </TextBox>
+                    </StackPanel>
                 </WrapPanel>
             </StackPanel>
         </DataTemplate>
@@ -683,58 +891,16 @@
             <StackPanel>
                 <TextBlock Foreground="#C9C9C9"
                            Text="Выбранный Продавец"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                 <WrapPanel>
                     <Label Content="Id :"
                            Target="{Binding ElementName=Id}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,0" />
                     <TextBlock x:Name="Id"
                                Text="{Binding IdProvider, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="#C9C9C9"
-                               Margin="5,5,5,5" 
-                               VerticalAlignment="Center"/>
-                </WrapPanel>
-
-                <Label Content="Название"
-                       Target="{Binding ElementName=Name}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Name"
-                         Text="{Binding NameProvider, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Name}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-            </StackPanel>
-        </DataTemplate>
-
-        <DataTemplate x:Key="ProductTemplate">
-            <StackPanel>
-                <TextBlock Foreground="#C9C9C9"
-                           Text="Выбранный Продукт"
-                           Margin="5,5,5,5" />
-                <WrapPanel>
-                    <Label Content="Id :"
-                           Target="{Binding ElementName=Id}"
-                           Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
-                    <TextBlock x:Name="Id"
-                               Text="{Binding IdProduct, UpdateSourceTrigger=PropertyChanged}"
-                               Foreground="#C9C9C9"
-                               Margin="5,5,5,5"
+                               Margin="0,0,5,0" 
                                VerticalAlignment="Center"/>
                 </WrapPanel>
 
@@ -742,14 +908,59 @@
                     <Label Content="Название"
                            Target="{Binding ElementName=Name}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Name"
+                             Text="{Binding NameProvider, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Name}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+                
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ProductTemplate">
+            <StackPanel>
+                <TextBlock Foreground="#C9C9C9"
+                           Text="Выбранный Продукт"
+                           Margin="5,0,5,5" />
+                <WrapPanel>
+                    <Label Content="Id :"
+                           Target="{Binding ElementName=Id}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,0" />
+                    <TextBlock x:Name="Id"
+                               Text="{Binding IdProduct, UpdateSourceTrigger=PropertyChanged}"
+                               Foreground="#C9C9C9"
+                               Margin="0,0,5,0"
+                               VerticalAlignment="Center"/>
+                </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Название :"
+                           Target="{Binding ElementName=Name}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
                     <TextBox x:Name="Name"
                              Text="{Binding NameProduct, UpdateSourceTrigger=PropertyChanged}"
                              Foreground="#C9C9C9"
                              Background="Transparent"
                              SelectionBrush="#FFCACACA"
-                             Margin="5,0,5,5"
-                             Padding="5,5,5,5">
+                             Padding="2"
+                             VerticalAlignment="Top">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
@@ -762,17 +973,17 @@
                         </i:Interaction.Triggers>
                     </TextBox>
                     
-                    <Label Content="Количество"
+                    <Label Content="Количество :"
                            Target="{Binding ElementName=Quantity}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                     <TextBox x:Name="Quantity"
                              Text="{Binding QuantityProduct, UpdateSourceTrigger=PropertyChanged}"
                              Foreground="#C9C9C9"
                              Background="Transparent"
                              SelectionBrush="#FFCACACA"
-                             Margin="5,0,5,5"
-                             Padding="5,5,5,5">
+                             Padding="2"
+                             VerticalAlignment="Top">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
@@ -785,17 +996,17 @@
                         </i:Interaction.Triggers>
                     </TextBox>
                     
-                    <Label Content="Райтинг Продукта"
+                    <Label Content="Райтинг Продукта :"
                            Target="{Binding ElementName=Rating}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                     <TextBox x:Name="Rating"
                              Text="{Binding RatingProduct, UpdateSourceTrigger=PropertyChanged}"
                              Foreground="#C9C9C9"
                              Background="Transparent"
                              SelectionBrush="#FFCACACA"
-                             Margin="5,0,5,5"
-                             Padding="5,5,5,5">
+                             Padding="2"
+                             VerticalAlignment="Top">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
@@ -808,17 +1019,17 @@
                         </i:Interaction.Triggers>
                     </TextBox>
 
-                    <Label Content="Цена"
+                    <Label Content="Цена :"
                            Target="{Binding ElementName=Price}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                     <TextBox x:Name="Price"
                              Text="{Binding PriceProduct, UpdateSourceTrigger=PropertyChanged}"
                              Foreground="#C9C9C9"
                              Background="Transparent"
                              SelectionBrush="#FFCACACA"
-                             Margin="5,0,5,5"
-                             Padding="5,5,5,5">
+                             Padding="2"
+                             VerticalAlignment="Top">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
@@ -832,111 +1043,170 @@
                     </TextBox>
                 </WrapPanel>
 
-                <Label Content="Тип Продукта :"
+                <WrapPanel x:Name="TypeProduct">
+                    <Label Content="Тип Продукта :"
                        Target="{Binding ElementName=TypesProductsComboBox}"
                        Foreground="#C9C9C9"
                        Margin="5,5,5,5" />
-                <ComboBox x:Name="TypesProductsComboBox"
-                          ItemsSource="{Binding DataContext.TypesProducts, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                          Margin="5,5,5,5">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding NameTypeProduct}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                    <StackPanel>
+                        <WrapPanel x:Name="CurrentTypeProduct">
+                            <TextBlock x:Name="NameTypeProduct"
+                                       Text="{Binding IdTypeProductNavigation.NameTypeProduct}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />
+                            <TextBlock x:Name="IdTypeProduct"
+                                       Text="{Binding IdTypeProduct}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />
+                        </WrapPanel>
 
-                <Label Content="Поставщик :"
-                       Target="{Binding ElementName=ProvidersComboBox}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <ComboBox x:Name="ProvidersComboBox"
-                          ItemsSource="{Binding DataContext.Providers, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                          Margin="5,5,5,5">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <TextBlock Text="{Binding NameProvider}" />
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
+                        <!--TODO ComboBox-->
+                        <ComboBox x:Name="TypesProductsComboBox"
+                                  ItemsSource="{Binding DataContext.TypesProducts, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                  SelectedValue="{Binding IdTypeProduct, Mode=TwoWay}"
+                                  SelectedValuePath="IdTypeProduct"
+                                  Margin="0,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NameTypeProduct}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </WrapPanel>
+
+
+                <WrapPanel x:Name="Provider">
+                    <Label Content="Поставщик :"
+                            Target="{Binding ElementName=ProvidersComboBox}"
+                            Foreground="#C9C9C9"
+                            Margin="5,5,5,5" />
+                    <StackPanel>
+                        <WrapPanel x:Name="CurrentProvider">
+                            <TextBlock x:Name="NameCategory"
+                                       Text="{Binding IdProviderNavigation.NameProvider}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />
+                            <TextBlock x:Name="IdProvider"
+                                       Text="{Binding IdProvider}"
+                                       Foreground="#C9C9C9"
+                                       Margin="0,10,5,5"
+                                       VerticalAlignment="Center" />
+                        </WrapPanel>
+
+                        <!--TODO ComboBox-->
+                        <ComboBox x:Name="ProvidersComboBox"
+                                  ItemsSource="{Binding DataContext.Providers, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                  SelectedValue="{Binding IdProvider, Mode=TwoWay}"
+                                  SelectedValuePath="IdProvider"
+                                  Margin="0,5,5,5">
+                            <i:Interaction.Triggers>
+                                <i:EventTrigger EventName="SelectionChanged">
+                                    <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                </i:EventTrigger>
+                            </i:Interaction.Triggers>
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding NameProvider}" />
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
+                    </StackPanel>
+                </WrapPanel>
+
+                
             </StackPanel>
         </DataTemplate>
 
         <DataTemplate x:Key="StoreTemplate">
             <StackPanel>
                 <TextBlock Foreground="#C9C9C9"
-                           Text="Выбранный Продавец"
-                           Margin="5,5,5,5" />
+                           Text="Выбранный Магазин"
+                           Margin="5,0,5,5" />
                 <WrapPanel>
                     <Label Content="Id :"
                            Target="{Binding ElementName=Id}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,0" />
                     <TextBlock x:Name="Id"
                                Text="{Binding IdStore, UpdateSourceTrigger=PropertyChanged}"
                                Foreground="#C9C9C9"
-                               Margin="5,5,5,5"
+                               Margin="0,0,5,0"
                                VerticalAlignment="Center"/>
                 </WrapPanel>
 
-                <Label Content="Город"
-                       Target="{Binding ElementName=City}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="City"
-                         Text="{Binding CityStore, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=City}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=City}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
+                <WrapPanel>
+                    <Label Content="Город"
+                           Target="{Binding ElementName=City}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="City"
+                             Text="{Binding CityStore, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=City}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=City}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
 
-                <Label Content="Улица"
-                       Target="{Binding ElementName=Street}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Street"
-                         Text="{Binding StreetStore, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Street}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Street}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
-
+                <WrapPanel>
+                    <Label Content="Улица"
+                           Target="{Binding ElementName=Street}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Street"
+                             Text="{Binding StreetStore, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Street}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Street}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
+                
                 <WrapPanel>
                     <Label Content="Дом"
                            Target="{Binding ElementName=House}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                     <TextBox x:Name="House"
                              Text="{Binding HouseStore, UpdateSourceTrigger=PropertyChanged}"
                              Foreground="#C9C9C9"
                              Background="Transparent"
                              SelectionBrush="#FFCACACA"
-                             Margin="5,0,5,5"
-                             Padding="5,5,5,5">
+                             Padding="2"
+                             VerticalAlignment="Top">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
@@ -952,14 +1222,14 @@
                     <Label Content="Номер Дома"
                            Target="{Binding ElementName=House_Number}"
                            Foreground="#C9C9C9"
-                           Margin="5,5,5,5" />
+                           Margin="5,0,5,5" />
                     <TextBox x:Name="House_Number"
                              Text="{Binding NumberStore, UpdateSourceTrigger=PropertyChanged}"
                              Foreground="#C9C9C9"
                              Background="Transparent"
                              SelectionBrush="#FFCACACA"
-                             Margin="5,0,5,5"
-                             Padding="5,5,5,5">
+                             Padding="2"
+                             VerticalAlignment="Top">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="GotFocus">
                                 <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
@@ -972,29 +1242,32 @@
                         </i:Interaction.Triggers>
                     </TextBox>
                 </WrapPanel>
+
+                <WrapPanel>
+                    <Label Content="Райтинг Магазина"
+                           Target="{Binding ElementName=Rating}"
+                           Foreground="#C9C9C9"
+                           Margin="5,0,5,5" />
+                    <TextBox x:Name="Rating"
+                             Text="{Binding RatingStore, UpdateSourceTrigger=PropertyChanged}"
+                             Foreground="#C9C9C9"
+                             Background="Transparent"
+                             SelectionBrush="#FFCACACA"
+                             Padding="2"
+                             VerticalAlignment="Top">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="GotFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Rating}" />
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="LostFocus">
+                                <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                                       CommandParameter="{Binding ElementName=Rating}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </TextBox>
+                </WrapPanel>
                 
-                <Label Content="Райтинг Магазина"
-                       Target="{Binding ElementName=Rating}"
-                       Foreground="#C9C9C9"
-                       Margin="5,5,5,5" />
-                <TextBox x:Name="Rating"
-                         Text="{Binding RatingStore, UpdateSourceTrigger=PropertyChanged}"
-                         Foreground="#C9C9C9"
-                         Background="Transparent"
-                         SelectionBrush="#FFCACACA"
-                         Margin="5,0,5,5"
-                         Padding="5,5,5,5">
-                    <i:Interaction.Triggers>
-                        <i:EventTrigger EventName="GotFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.GotFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Rating}" />
-                        </i:EventTrigger>
-                        <i:EventTrigger EventName="LostFocus">
-                            <i:InvokeCommandAction Command="{Binding DataContext.LostFocusCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                   CommandParameter="{Binding ElementName=Rating}" />
-                        </i:EventTrigger>
-                    </i:Interaction.Triggers>
-                </TextBox>
 
                 <ListView ItemsSource="{Binding Employees}"
                           Background="#393939"

@@ -156,6 +156,8 @@ namespace OnlineShop.Models.Data
             using (ApplicationContext db = new ApplicationContext())
             {
                 db.Orders
+                    .Include(_order => _order.IdOrderStatusNavigation)
+                    .Include(_order => _order.IdStoreNavigation)
                     .Include(_order => _order.IdCustomerNavigation)
                     .Include(_orders => _orders.IdEmployeeNavigation)
                     .Include(_order => _order.OrderDetails)
@@ -210,6 +212,7 @@ namespace OnlineShop.Models.Data
                 db.OrderDetails
                     .Include(_detail => _detail.IdOrderNavigation)
                     .Include(_detail => _detail.IdProductNavigation)
+                    .ThenInclude(_product => _product.IdTypeProductNavigation)
                     .Load();
                 var result = db.OrderDetails.Local.ToObservableCollection();
                 return result;

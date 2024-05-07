@@ -52,9 +52,27 @@ public partial class OrderDetail : PropertyChange
         }
     }
 
-    public virtual Order IdOrderNavigation { get; set; } = null!;
+    private Order idOrderNavigation;
+    public virtual Order IdOrderNavigation 
+    { 
+        get { return idOrderNavigation; }
+        set
+        {
+            idOrderNavigation = value;
+            OnPropertyChanged(nameof(IdOrderNavigation));
+        }
+    }
 
-    public virtual Product IdProductNavigation { get; set; } = null!;
+    private Product idProductNavigation;
+    public virtual Product IdProductNavigation 
+    {
+        get { return idProductNavigation; }
+        set
+        {
+            idProductNavigation = value;
+            OnPropertyChanged(nameof(IdProductNavigation));
+        }
+    }
 
     public int Price 
     { 

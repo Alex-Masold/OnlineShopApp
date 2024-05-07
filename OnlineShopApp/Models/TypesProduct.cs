@@ -35,23 +35,4 @@ public partial class TypesProduct : PropertyChange
     public virtual Category IdCategoryNavigation { get; set; } = null!;
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
-
-    [NotMapped]
-    public ObservableCollection<Product> ObservableProducts
-    {
-        get { return new ObservableCollection<Product>(Products); }
-    }
-
-    [NotMapped]
-    private bool isEditName;
-    [NotMapped]
-    public bool IsEditName
-    {
-        get { return isEditName; }
-        set
-        {
-            isEditName = value;
-            OnPropertyChanged(nameof(IsEditName));
-        }
-    }
 }

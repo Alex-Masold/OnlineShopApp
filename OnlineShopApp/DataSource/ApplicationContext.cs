@@ -172,7 +172,7 @@ public partial class ApplicationContext : DbContext
 
 			entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.OrderDetails)
 				.HasForeignKey(d => d.IdProduct)
-				.OnDelete(DeleteBehavior.Cascade)
+				.OnDelete(DeleteBehavior.SetNull)
 				.HasConstraintName("FK_ORDER_DETAILS_PRODUCTS");
 		});
 

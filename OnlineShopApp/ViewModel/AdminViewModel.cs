@@ -161,7 +161,7 @@ namespace OnlineShop.ViewModel
             }
         }
 
-        public void Change(string newVersion)
+        private void Change(string newVersion)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -178,7 +178,7 @@ namespace OnlineShop.ViewModel
                 
             }
         }
-        public void Change(int newVersion)
+        private void Change(int newVersion)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -195,7 +195,7 @@ namespace OnlineShop.ViewModel
 
             }
         }
-        public void Change(double newVersion)
+        private void Change(double newVersion)
         {
             using (ApplicationContext db = new ApplicationContext())
             {
@@ -210,6 +210,14 @@ namespace OnlineShop.ViewModel
                     db.SaveChanges();
                 }
 
+            }
+        }
+        private void Change()
+        {
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                db.Entry(SelectedItem).State = EntityState.Modified;
+                db.SaveChanges();
             }
         }
 
@@ -535,14 +543,28 @@ namespace OnlineShop.ViewModel
             }
         }
 
-        private RelayCommand selectionChangedTypeProduct;
-        public RelayCommand SelectionChangedTypeProduct
+        private RelayCommand selectionChangedCommand;
+        public RelayCommand SelectionChangedCommand
         {
             get
             {
-                return selectionChangedTypeProduct ?? (selectionChangedTypeProduct = new RelayCommand(obj =>
+                return selectionChangedCommand ?? (selectionChangedCommand = new RelayCommand(obj =>
                 {
-                    
+                    ComboBox comboBox = obj as ComboBox;
+                    if (comboBox != null)
+                    {
+                        //if (SelectedItem is TypesProduct)
+                        //{
+                            //TypesProduct typesProduct = (TypesProduct)SelectedItem;
+                            //Category category = (Category)comboBox.SelectedItem;
+                            //string newString = category.NameCategory;
+                            //oldString = typesProduct.IdCategoryNavigation.NameCategory;
+
+                            Change();
+                            
+                            //Test(newString);
+                        //}
+                    }
                         
                 }));
             }

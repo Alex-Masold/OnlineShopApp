@@ -21,17 +21,4 @@ public partial class Provider : PropertyChange
     }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
-
-    [NotMapped]
-    private bool isEditName;
-    [NotMapped]
-    public bool IsEditName
-    {
-        get { return isEditName; }
-        set
-        {
-            isEditName = value;
-            OnPropertyChanged(nameof(IsEditName));
-        }
-    }
 }
