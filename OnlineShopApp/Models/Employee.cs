@@ -18,6 +18,7 @@ public partial class Employee : PropertyChange
         {
             nameEmployee = value;
             OnPropertyChanged(nameof(NameEmployee));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -29,6 +30,7 @@ public partial class Employee : PropertyChange
         {
             familyEmployee = value;
             OnPropertyChanged(nameof(FamilyEmployee));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -89,5 +91,19 @@ public partial class Employee : PropertyChange
 
     public virtual ICollection<Order> Orders { get; set;} = new List<Order>();
 
-    public string Name { get { return FamilyEmployee + ' ' + NameEmployee; } }
+    [NotMapped]
+    public string Name
+    {
+        get { return $"{familyEmployee} {nameEmployee}"; }
+        set
+        {
+            string[] components = value.Split(' ');
+            if (components.Length == 2)
+            {
+                familyEmployee = components[0];
+                nameEmployee = components[1];
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+    }
 }

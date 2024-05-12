@@ -18,6 +18,7 @@ public partial class Store : PropertyChange
         {
             cityStore = value;
             OnPropertyChanged(nameof(CityStore));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -29,6 +30,7 @@ public partial class Store : PropertyChange
         {
             streetStore = value; 
             OnPropertyChanged(nameof(StreetStore));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -40,6 +42,7 @@ public partial class Store : PropertyChange
         {
             houseStore = value;
             OnPropertyChanged(nameof(HouseStore));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -51,6 +54,7 @@ public partial class Store : PropertyChange
         {
             numderStore = value;
             OnPropertyChanged(nameof(NumberStore));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -68,5 +72,21 @@ public partial class Store : PropertyChange
     public virtual ICollection<Employee> Employees { get; set; } = new List<Employee>();
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public string Name { get { return CityStore + ' ' + StreetStore +' ' + HouseStore; } }
+    [NotMapped]
+    public string Name
+    {
+        get { return $"{cityStore} {streetStore} {houseStore} {numderStore}"; }
+        set
+        {
+            string[] components = value.Split(' ');
+            if (components.Length == 4)
+            {
+                cityStore = components[0];
+                streetStore = components[1];
+                houseStore = components[2];
+                numderStore = components[3];
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+    }
 }

@@ -97,28 +97,15 @@
                 </WrapPanel>
 
                 <WrapPanel x:Name="Category">
-                    <Label Content="Категория"
+                    <Label Content="Категория :"
                            Target="{Binding ElementName=CategoryComboBox}"
                            Foreground="#C9C9C9"
                            Margin="5,5,5,5" />
                     <StackPanel>
-                        <WrapPanel x:Name="CurrentCategory">
-                            <!--<TextBlock x:Name="NameCategory"
-                                       Text="{Binding IdCategoryNavigation.NameCategory}"
-                                       Foreground="#C9C9C9"
-                                       Margin="0,10,5,5"
-                                       VerticalAlignment="Center" />-->
-                            <TextBlock x:Name="IdCategory"
-                                       Text="{Binding IdCategory}"
-                                       Foreground="#C9C9C9"
-                                       Margin="0,10,5,5"
-                                       VerticalAlignment="Center" />
-                        </WrapPanel>
-
-                        <!--TODO ComboBox-->
                         <ComboBox x:Name="CategoryComboBox"
                                   ItemsSource="{Binding DataContext.Categories, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                  SelectedValue="{Binding IdCategory, Mode=TwoWay}"
+                                  SelectedItem="{Binding IdCategoryNavigation, Mode=TwoWay}"
+                                  SelectedValue="{Binding IdCategory}"
                                   SelectedValuePath="IdCategory"
                                   Margin="0,5,5,5">
                             <i:Interaction.Triggers>
@@ -139,7 +126,6 @@
                         </ComboBox>
                     </StackPanel>
                 </WrapPanel>
-                
             </StackPanel>
         </DataTemplate>
 
@@ -272,7 +258,7 @@
                                     <GridViewColumn.CellTemplate>
                                         <DataTemplate>
                                             <StackPanel>
-                                                <TextBlock Text="{Binding IdCustomer}" />
+                                                <TextBlock Text="{Binding IdOrder}" />
                                             </StackPanel>
                                         </DataTemplate>
                                     </GridViewColumn.CellTemplate>
@@ -457,28 +443,16 @@
                 </WrapPanel>
 
                 <WrapPanel x:Name="Store">
-                    <Label Content="Магазин"
+                    <Label Content="Магазин :"
                            Target="{Binding ElementName=StoreComboBox}"
                            Foreground="#C9C9C9"
                            Margin="5,5,5,5" />
                     <StackPanel>
-                        <WrapPanel x:Name="CurrentStore">
-                            <!--<TextBlock x:Name="NameStore"
-                                       Text="{Binding IdStoreNavigation.Name}"
-                                       Foreground="#C9C9C9"
-                                       Margin="0,10,5,5"
-                                       VerticalAlignment="Center" />-->
-                            <TextBlock x:Name="IdStore"
-                                       Text="{Binding IdStore}"
-                                       Foreground="#C9C9C9"
-                                       Margin="0,10,5,5"
-                                       VerticalAlignment="Center" />
-                        </WrapPanel>
-
                         <!--TODO ComboBox-->
                         <ComboBox x:Name="StoreComboBox"
                                   ItemsSource="{Binding DataContext.Stores, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                  SelectedValue="{Binding IdStore, Mode=TwoWay}"
+                                  SelectedItem="{Binding IdStoreNavigation, Mode=TwoWay}"
+                                  SelectedValue="{Binding IdStore}"
                                   SelectedValuePath="IdStore"
                                   Margin="0,5,5,5">
                             <i:Interaction.Triggers>
@@ -489,7 +463,11 @@
                             </i:Interaction.Triggers>
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding StreetStore}" />
+                                    <WrapPanel>
+                                        <TextBlock Margin="0,0,5,0" 
+                                                   Text="{Binding Name}" />
+                                        <TextBlock Text="{Binding IdStore}" />
+                                    </WrapPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
@@ -564,35 +542,27 @@
                                Target="{Binding ElementName=StatusComboBox}"
                                Foreground="#C9C9C9"
                                Margin="5,5,5,5" />
-
-                        <!--<TextBlock x:Name="NameStatus"
-                                   Text="{Binding IdOrderStatusNavigation.Status}"
-                                   Foreground="#C9C9C9"
-                                   Margin="0,5,5,5"
-                                   VerticalAlignment="Center" />-->
-                        <TextBlock x:Name="IdStatus"
-                                   Text="{Binding IdOrderStatus}"
-                                   Foreground="#C9C9C9"
-                                   Margin="0,5,5,5"
-                                   VerticalAlignment="Center" />
                     </WrapPanel>
 
                     <!--TODO ComboBox-->
                     <ComboBox x:Name="StatusComboBox"
                               ItemsSource="{Binding DataContext.OrdersStatuses, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                              SelectedValue="{Binding IdOrderStatus, Mode=TwoWay}"
+                              SelectedItem="{Binding IdOrderStatusNavigation, Mode=TwoWay}"
+                              SelectedValue="{Binding IdOrderStatus}"
                               SelectedValuePath="IdStatus"
                               Margin="0,5,5,5">
                         <i:Interaction.Triggers>
                             <i:EventTrigger EventName="SelectionChanged">
                                 <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                       CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                                       CommandParameter="{Binding ElementName=StatusComboBox}" />
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                         <ComboBox.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding Name}" />
+                                    <TextBlock Margin="0,0,5,0" 
+                                               Text="{Binding Status}" />
+                                    <TextBlock Text="{Binding IdStatus}" />
                                 </WrapPanel>
                             </DataTemplate>
                         </ComboBox.ItemTemplate>
@@ -616,34 +586,27 @@
                            Foreground="#C9C9C9"
                            Margin="5,5,5,5" />
                     <StackPanel>
-                        <WrapPanel x:Name="CurrentCustomer">
-                            <TextBlock x:Name="NameCustomer"
-                                       Text="{Binding IdCustomerNavigation.Name}"
-                                       Foreground="#C9C9C9"
-                                       Margin="0,10,5,5"
-                                       VerticalAlignment="Center" />
-                            <TextBlock x:Name="IdCustomer"
-                                       Text="{Binding IdCustomer}"
-                                       Foreground="#C9C9C9"
-                                       Margin="0,10,5,5"
-                                       VerticalAlignment="Center" />
-                        </WrapPanel>
-
+                        
                         <!--TODO ComboBox-->
                         <ComboBox x:Name="CustomersComboBox"
                                   ItemsSource="{Binding DataContext.Customers, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                  SelectedValue="{Binding IdCustomer, Mode=TwoWay}"
+                                  SelectedItem="{Binding IdCustomerNavigation, Mode=TwoWay}"
+                                  SelectedValue="{Binding IdCustomer}"
                                   SelectedValuePath="IdCustomer"
                                   Margin="0,5,5,5">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                                           CommandParameter="{Binding ElementName=CustomersComboBox}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding NameCustomer}" />
+                                    <WrapPanel>
+                                        <TextBlock Margin="0,0,5,0"
+                                                   Text="{Binding Name}" />
+                                        <TextBlock Text="{Binding IdCustomer}" />
+                                    </WrapPanel>
                                 </DataTemplate>
                             </ComboBox.ItemTemplate>
                         </ComboBox>
@@ -673,13 +636,14 @@
                         <!--TODO ComboBox-->
                         <ComboBox x:Name="StoresComboBox"
                                   ItemsSource="{Binding DataContext.Stores, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                  SelectedValue="{Binding IdStore, Mode=TwoWay}"
+                                  SelectedItem="{Binding IdStoreNavigation, Mode=TwoWay}"
+                                  SelectedValue="{Binding IdStore}"
                                   SelectedValuePath="IdStore"
                                   Margin="0,5,5,5">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                                           CommandParameter="{Binding ElementName=StoresComboBox}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ComboBox.ItemTemplate>
@@ -714,13 +678,14 @@
                         <!--TODO ComboBox-->
                         <ComboBox x:Name="EmployeeComboBox"
                                   ItemsSource="{Binding IdStoreNavigation.Employees}"
-                                  SelectedValue="{Binding IdEmployee, Mode=TwoWay}"
+                                  SelectedItem="{Binding IdEmployeeNavigation}"
+                                  SelectedValue="{Binding IdEmployee}"
                                   SelectedValuePath="IdEmployee"
                                   Margin="0,5,5,5">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                                           CommandParameter="{Binding ElementName=EmployeeComboBox}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ComboBox.ItemTemplate>
@@ -807,7 +772,8 @@
                     <!--TODO ComboBox-->
                     <ComboBox x:Name="OrdersComboBox"
                               ItemsSource="{Binding DataContext.Orders, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                              SelectedValue="{Binding IdOrder, Mode=TwoWay}"
+                              SelectedItem="{Binding IdOrderNavigation, Mode=TwoWay}"
+                              SelectedValue="{Binding IdOrder}"
                               SelectedValuePath="IdOrder"
                               Margin="0,5,5,5">
                         <i:Interaction.Triggers>
@@ -845,14 +811,15 @@
 
                         <!--TODO ComboBox-->
                         <ComboBox x:Name="ProductsComboBox"
-                              ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                  SelectedValue="{Binding IdProduct, Mode=TwoWay}"
+                                  ItemsSource="{Binding DataContext.Products, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
+                                  SelectedItem="{Binding IdProductNavigation, Mode=TwoWay}"
+                                  SelectedValue="{Binding IdProduct}"
                                   SelectedValuePath="IdProduct"
                                   Margin="0,5,5,5">
                             <i:Interaction.Triggers>
                                 <i:EventTrigger EventName="SelectionChanged">
                                     <i:InvokeCommandAction Command="{Binding DataContext.SelectionChangedCommand, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                                           CommandParameter="{Binding ElementName=CategoryComboBox}" />
+                                                           CommandParameter="{Binding ElementName=ProductsComboBox}" />
                                 </i:EventTrigger>
                             </i:Interaction.Triggers>
                             <ComboBox.ItemTemplate>
@@ -1065,7 +1032,8 @@
                         <!--TODO ComboBox-->
                         <ComboBox x:Name="TypesProductsComboBox"
                                   ItemsSource="{Binding DataContext.TypesProducts, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                  SelectedValue="{Binding IdTypeProduct, Mode=TwoWay}"
+                                  SelectedItem="{Binding IdTypeProductNavigation, Mode=TwoWay}"
+                                  SelectedValue="{Binding IdTypeProduct}"
                                   SelectedValuePath="IdTypeProduct"
                                   Margin="0,5,5,5">
                             <i:Interaction.Triggers>
@@ -1106,7 +1074,8 @@
                         <!--TODO ComboBox-->
                         <ComboBox x:Name="ProvidersComboBox"
                                   ItemsSource="{Binding DataContext.Providers, RelativeSource={RelativeSource AncestorType={x:Type parent:AdminView}}}"
-                                  SelectedValue="{Binding IdProvider, Mode=TwoWay}"
+                                  SelectedItem="{Binding IdProviderNavigation, Mode=TwoWay}"
+                                  SelectedValue="{Binding IdProvider}"
                                   SelectedValuePath="IdProvider"
                                   Margin="0,5,5,5">
                             <i:Interaction.Triggers>

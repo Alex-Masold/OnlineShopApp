@@ -12,12 +12,6 @@ namespace OnlineShopApp.Views.Controls
         public EditControl()
         {
             InitializeComponent();
-        }
-
-        private void CategoryComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MessageBox.Show("101");
-
-        }
+        } 
     }
 }

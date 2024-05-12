@@ -17,6 +17,7 @@ namespace OnlineShop.ViewModel
 {
     public class CustomerViewModel : PropertyChange
     {
+        private ApplicationContext db;
         private ObservableCollection<Product> products;
         public ObservableCollection<Product> Products { 
             get { return products; } 
@@ -141,8 +142,8 @@ namespace OnlineShop.ViewModel
             }
 
 
-            Products = new ObservableCollection<Product>(StaticData.GetAllProducts());
-            NewOrder = StaticData.GetOrder(NewOrder.IdOrder);
+            //Products = new ObservableCollection<Product>(StaticData.GetAllProducts(db));
+            //NewOrder = StaticData.GetOrder(NewOrder.IdOrder);
         }
         async public void DownCount(int id)
         {
@@ -173,8 +174,8 @@ namespace OnlineShop.ViewModel
                     db.OrderDetails.Remove(detail);
                     await db.SaveChangesAsync();
                 }
-                Products = new ObservableCollection<Product>(StaticData.GetAllProducts());
-                NewOrder = StaticData.GetOrder(NewOrder.IdOrder);
+                //Products = new ObservableCollection<Product>(StaticData.GetAllProducts());
+                //NewOrder = StaticData.GetOrder(NewOrder.IdOrder);
             }
         }
         async public void EndOrder()
@@ -249,7 +250,7 @@ namespace OnlineShop.ViewModel
         public CustomerViewModel(Customer _customer)
         {
             Customer = _customer;
-            Products = StaticData.GetAllProducts();
+            Products = StaticData.GetAllProducts(db);
             NewOrder = Customer.Orders.FirstOrDefault(_order => _order.IdOrderStatusNavigation.Status == "В корзине") ?? null;
         }
     }

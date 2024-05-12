@@ -14,23 +14,20 @@ namespace OnlineShop.Models.Data
         public static Frame MainContentFrame = new Frame() { NavigationUIVisibility = NavigationUIVisibility.Hidden };
 
         #region Получение
-        //Получить Категории
-        public static ObservableCollection<Category> GetAllCategories()
+        #region Категории
+        //Получить Категории в пререданном контексте данных
+        public static ObservableCollection<Category> GetAllCategories(ApplicationContext db)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Categories.Load();
-                var result = db.Categories.Local.ToObservableCollection();
-                return result;
-            }
+            db.Categories.Load();
+            return db.Categories.Local.ToObservableCollection();
         }
+        #endregion
 
-        //Получить Покупателей
-        public static ObservableCollection<Customer> GetAllCustomers()
+        #region Покупатели
+        //Получить Покупателей в переданном контексте данных
+        public static ObservableCollection<Customer> GetAllCustomers(ApplicationContext db)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Customers
+            db.Customers
                     .Include(_customer => _customer.Orders)
                     .ThenInclude(_order => _order.IdOrderStatusNavigation)
 
@@ -42,9 +39,7 @@ namespace OnlineShop.Models.Data
                     .ThenInclude(_detail => _detail.IdProductNavigation)
                     .ThenInclude(_product => _product.IdTypeProductNavigation)
                     .Load();
-                var result = db.Customers.Local.ToObservableCollection();
-                return result;
-            }
+            return db.Customers.Local.ToObservableCollection();
         }
         // Получить Конкретного Покупателя
         public static Customer GetCustomer(int id)
@@ -98,7 +93,9 @@ namespace OnlineShop.Models.Data
                 }
             }
         }
+        #endregion
 
+        #region Сотрудники
         //Получить Сотрудников
         public static ObservableCollection<Employee> GetAllEmployees()
         {
@@ -110,6 +107,15 @@ namespace OnlineShop.Models.Data
                 var result = db.Employees.Local.ToObservableCollection();
                 return result;
             }
+        }
+
+        // Получить Сотрудников в переданном контектсе
+        public static ObservableCollection<Employee> GetAllEmployees(ApplicationContext db)
+        {
+            db.Employees
+                .Include(_employees => _employees.IdStoreNavigation)
+                .Load();
+            return db.Employees.Local.ToObservableCollection();
         }
 
         // Получить Конкретного Сотрудника
@@ -149,24 +155,22 @@ namespace OnlineShop.Models.Data
                 }
             }
         }
+        #endregion
 
+        #region Заказы
         // Получить Заказы
-        public static ObservableCollection<Order> GetAllOrders()
+        public static ObservableCollection<Order> GetAllOrders(ApplicationContext db)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Orders
-                    .Include(_order => _order.IdOrderStatusNavigation)
-                    .Include(_order => _order.IdStoreNavigation)
-                    .Include(_order => _order.IdCustomerNavigation)
-                    .Include(_orders => _orders.IdEmployeeNavigation)
-                    .Include(_order => _order.OrderDetails)
-                    .ThenInclude(_detail => _detail.IdProductNavigation)
-                    .ThenInclude(_product => _product.IdTypeProductNavigation)
-                    .Load();
-                var result = db.Orders.Local.ToObservableCollection();
-                return result;
-            }
+            db.Orders
+                .Include(_order => _order.IdOrderStatusNavigation)
+                .Include(_order => _order.IdStoreNavigation)
+                .Include(_order => _order.IdCustomerNavigation)
+                .Include(_orders => _orders.IdEmployeeNavigation)
+                .Include(_order => _order.OrderDetails)
+                .ThenInclude(_detail => _detail.IdProductNavigation)
+                .ThenInclude(_product => _product.IdTypeProductNavigation)
+                .Load();
+            return db.Orders.Local.ToObservableCollection();
         }
 
         // Получить Конкретный Заказ
@@ -190,33 +194,29 @@ namespace OnlineShop.Models.Data
                 }
             }
         }
+        #endregion
 
+        #region Статусы Заказа
         //Получить Статусы Заказа
-        public static ObservableCollection<OrderStatus> GetAllOrderStatuses()
+        public static ObservableCollection<OrderStatus> GetAllOrderStatuses(ApplicationContext db)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.OrderStatuses
-                    .Include(_status => _status.Orders)
-                    .Load();
-                var result = db.OrderStatuses.Local.ToObservableCollection();
-                return result;
-            }
+            db.OrderStatuses
+                .Include(_status => _status.Orders)
+                .Load();
+            return db.OrderStatuses.Local.ToObservableCollection();
         }
+        #endregion
 
+        #region Детали Заказов
         //Получить Детали Заказов
-        public static ObservableCollection<OrderDetail> GetAllOrderDetails()
+        public static ObservableCollection<OrderDetail> GetAllOrderDetails(ApplicationContext db)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.OrderDetails
-                    .Include(_detail => _detail.IdOrderNavigation)
-                    .Include(_detail => _detail.IdProductNavigation)
-                    .ThenInclude(_product => _product.IdTypeProductNavigation)
-                    .Load();
-                var result = db.OrderDetails.Local.ToObservableCollection();
-                return result;
-            }
+            db.OrderDetails
+                .Include(_detail => _detail.IdOrderNavigation)
+                .Include(_detail => _detail.IdProductNavigation)
+                .ThenInclude(_product => _product.IdTypeProductNavigation)
+                .Load();
+            return db.OrderDetails.Local.ToObservableCollection();
         }
         // Получить Конкретную Деталь Заказа
         public static OrderDetail GetOrderDetail(int id)
@@ -237,19 +237,17 @@ namespace OnlineShop.Models.Data
                 }
             }
         }
+        #endregion
 
+        #region Продукты
         //Получить Продукты
-        public static ObservableCollection<Product> GetAllProducts()
+        public static ObservableCollection<Product> GetAllProducts(ApplicationContext db)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Products
-                    .Include(_product => _product.IdProviderNavigation)
-                    .Include(_product => _product.IdTypeProductNavigation)
-                    .Load();
-                var result = db.Products.Local.ToObservableCollection();
-                return result;
-            }
+            db.Products
+                .Include(_product => _product.IdProviderNavigation)
+                .Include(_product => _product.IdTypeProductNavigation)
+                .Load();
+            return db.Products.Local.ToObservableCollection();
         }
         // Получить Конкретный Продукт
         public static Product GetProduct(int id)
@@ -270,150 +268,37 @@ namespace OnlineShop.Models.Data
                 }
             }
         }
+        #endregion
 
+        #region Поставщики 
         //Получить Поставщиков
-        public static ObservableCollection<Provider> GetAllProviders()
+        public static ObservableCollection<Provider> GetAllProviders(ApplicationContext db)
         {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Providers.Include(_provider => _provider.Products).Load();
-                var result = db.Providers.Local.ToObservableCollection();
-                return result;
-            }
-        }
-
-        //Получить Магазины
-        public static ObservableCollection<Store> GetAllStores()
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.Stores
-                    .Include(_store => _store.Orders)
-                    .Include(_store => _store.Employees)
-                    .Load();
-                var result = db.Stores.Local.ToObservableCollection();
-                return result;
-            }
-        }
-
-        //Получить Типы продуктов
-        public static ObservableCollection<TypesProduct> GetAllTypesProducts()
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                db.TypesProducts.Include(_type => _type.IdCategoryNavigation).Load();
-                var result = db.TypesProducts.Local.ToObservableCollection();
-                return result;
-            }
+            db.Providers.Include(_provider => _provider.Products).Load();
+            return db.Providers.Local.ToObservableCollection();
         }
         #endregion
 
-        #region Создание 
-        //создать категорию
-        public static string CreateCategory(string name)
+        #region Магазины
+        //Получить Магазины
+        public static ObservableCollection<Store> GetAllStores(ApplicationContext db)
         {
-            string result = "Уже существует";
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                //Проверка на существование
-                bool checkIsExist = db.Categories.Any(el => el.NameCategory == name);
-                if (!checkIsExist)
-                {
-                    Category newCategory = new Category { NameCategory = name };
-                    db.Categories.Add(newCategory);
-                    db.SaveChanges();
-                    result = "Сделано";
-                }
-                return result;
-            }
+            db.Stores
+                .Include(_store => _store.Orders)
+                .Include(_store => _store.Employees)
+                .Load();
+            return db.Stores.Local.ToObservableCollection();
         }
+        #endregion
 
-        //создать Покупателя
-        public static string CreateCustomer(string name, string family, string mail)
+        #region Типы продуктов
+        //Получить Типы продуктов
+        public static ObservableCollection<TypesProduct> GetAllTypesProducts(ApplicationContext db)
         {
-            string email = $"{name}.{family}@{mail}";
-            string result = "Уже существуеь";
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                bool checkIsExist = db.Customers.Any(el => (el.NameCustomer == name) && (el.FamilyCustomer == family) && (el.EmailCustomer == email));
-                if (!checkIsExist)
-                {
-                    Customer newCustomer = new Customer { NameCustomer = name, FamilyCustomer = family, EmailCustomer = email };
-                    db.Customers.Add(newCustomer);
-                    db.SaveChanges();
-                    result = "Сделано";
-                }
-                return result;
-            }
+            db.TypesProducts.Include(_type => _type.IdCategoryNavigation).Load();
+            return db.TypesProducts.Local.ToObservableCollection();
         }
-
-        //Создать Сотрудника
-        public static string CreateEmployee(string name, string family, string mail, int idStore)
-        {
-
-            string email = $"{name}.{family}@{mail}";
-            string result = "Уже существуеь";
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                bool checkIsExist = db.Employees.Any(el =>
-                                                    (el.NameEmployee == name) &&
-                                                    (el.FamilyEmployee == family) &&
-                                                    (el.EmailEmployee == email) &&
-                                                    (el.IdStore == idStore));
-                if (!checkIsExist)
-                {
-                    Employee newEmployee = new Employee
-                    {
-                        NameEmployee = name,
-                        FamilyEmployee = family,
-                        EmailEmployee = email,
-                        IdStore = idStore
-                    };
-                    db.Employees.Add(newEmployee);
-                    db.SaveChanges();
-                    result = "Сделано";
-                }
-                return result;
-            }
-        }
-
-        //Создать Заказ
-        public static void CreateOrder(Order _order)
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            { 
-                db.Orders.Add(_order);
-                db.SaveChanges();
-            }
-        }
-
-         //Создать Детали Заказа
-        public static OrderDetail CreateOrderDetail(Order order, Product product)
-        {
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                OrderDetail newOrderDetail = new OrderDetail
-                {
-                    IdOrderNavigation = order,
-                    IdOrder = order.IdOrder,
-                    IdProductNavigation = product,
-                    IdProduct = product.IdProduct
-
-                };
-                db.OrderDetails.Add(newOrderDetail);
-                db.SaveChanges();
-                return newOrderDetail;
-            }
-
-        }
-
-            //Создать Продукт
-
-            //Создать Поставщика
-
-            //Создать Магазин
-
-            //Создать Тип продукта
-            #endregion
-        }
+        #endregion
+        #endregion
     }
+}

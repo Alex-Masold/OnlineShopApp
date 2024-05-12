@@ -9,7 +9,7 @@
       d:DesignWidth="900"
       Title="AdminView">
 
-    <DockPanel Margin="15,15,15,15" Background="#FF313131">
+    <DockPanel x:Name="AdminPanel" Margin="15,15,15,15" Background="#FF313131">
         <!--<Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />

@@ -1,7 +1,4 @@
-﻿using Castle.Core.Resource;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.VisualBasic.ApplicationServices;
-using OnlineShop.Models;
+﻿using Microsoft.EntityFrameworkCore;
 using OnlineShop.Models.Base;
 using OnlineShop.Models.Data;
 using OnlineShopApp.DataSource;
@@ -15,16 +12,7 @@ namespace OnlineShop.ViewModel
     public class AdminViewModel : PropertyChange
     {
         #region Категории
-        private ObservableCollection<Category> categories;
-        public ObservableCollection<Category> Categories
-        { 
-            get { return categories; }
-            set 
-            { 
-                categories = value; 
-                OnPropertyChanged(nameof(Categories));
-            }
-        }
+        public ObservableCollection<Category> Categories { get; set; }
         #endregion
 
         #region Типы Продуктов
@@ -57,7 +45,7 @@ namespace OnlineShop.ViewModel
         private ObservableCollection<Customer> customers;
         public ObservableCollection<Customer> Customers
         {
-            get { return customers; }
+            get { return customers; }           
             set
             {
                 customers = value;
@@ -146,6 +134,8 @@ namespace OnlineShop.ViewModel
         }
         #endregion
 
+        private ApplicationContext db = new ApplicationContext();
+
         private string oldString;
         private int oldInt;
         private double oldDouble;
@@ -188,7 +178,7 @@ namespace OnlineShop.ViewModel
                 }
                 else
                 {
-                    MessageBox.Show($"{oldString} -> {newVersion}");
+                    MessageBox.Show($"{oldInt} -> {newVersion}");
                     db.Entry(SelectedItem).State = EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -221,7 +211,7 @@ namespace OnlineShop.ViewModel
             }
         }
 
-        public void Test(string newVersion)
+        private void Test(string newVersion)
         {
             if (newVersion == oldString)
             {
@@ -233,7 +223,7 @@ namespace OnlineShop.ViewModel
             }
 
         }
-        public void Test(int newVersion)
+        private void Test(int newVersion)
         {
             if (newVersion == oldInt)
             {
@@ -245,7 +235,7 @@ namespace OnlineShop.ViewModel
             }
 
         }
-        public void Test(double newVersion)
+        private void Test(double newVersion)
         {
             if (newVersion == oldDouble)
             {
@@ -256,6 +246,54 @@ namespace OnlineShop.ViewModel
                 MessageBox.Show($"{oldDouble} -> {newVersion}");
             }
 
+        }
+
+        private void Add(string Name)
+        {
+            switch (Name)
+            {
+                case "Categories":
+                    Category newCategory = new Category();
+                    db.Categories.Add(newCategory);
+                    db.SaveChanges();
+                    break;
+                case "Customers":
+                    db.Customers.Add(new Customer());
+                    db.SaveChanges();
+                    break;
+                case "Employees":
+                    db.Employees.Add(new Employee());
+                    db.SaveChanges();
+                    break;
+                case "OrderDetails":
+                    db.OrderDetails.Add(new OrderDetail());
+                    db.SaveChanges();
+                    break;
+                case "Orders":
+                    db.Orders.Add(new Order());
+                    db.SaveChanges();
+                    break;
+                case "OrdersStatuses":
+                    db.OrderStatuses.Add(new OrderStatus());
+                    db.SaveChanges();
+                    break;
+                case "Products":
+                    db.Products.Add(new Product());
+                    db.SaveChanges();
+                    break;
+                case "Providers":
+                    db.Providers.Add(new Provider());
+                    db.SaveChanges();
+                    break;
+                case "Stores":
+                    db.Stores.Add(new Store());
+                    db.SaveChanges();
+                    break;
+                case "TypesProducts":
+                    db.TypesProducts.Add(new TypesProduct());
+                    db.SaveChanges();
+                    break;
+            }   
         }
 
         private RelayCommand gotFocusCommand;
@@ -566,31 +604,58 @@ namespace OnlineShop.ViewModel
                         //}
                     }
                         
+                 }));
+            }
+        }
+
+        private RelayCommand addCommand;
+        public RelayCommand AddCommand
+        {
+            get
+            {
+                return addCommand ?? (addCommand = new RelayCommand(obj =>
+                {
+                    ListView listView = obj as ListView;
+                    if (listView != null)
+                    {
+                        Add(listView.Name);
+                    }
                 }));
             }
         }
 
+        private RelayCommand deleteCommand;
+        public RelayCommand DeleteCommand
+        {
+            get
+            {
+                return deleteCommand ?? (new RelayCommand(obj =>
+                {
+
+                }));
+            }
+        }
         public AdminViewModel()
         {
-            TypesProducts = StaticData.GetAllTypesProducts();
+            Categories =    StaticData.GetAllCategories(db);
 
-            Categories =    StaticData.GetAllCategories();
+            TypesProducts = StaticData.GetAllTypesProducts(db);
 
-            Customers =     StaticData.GetAllCustomers();
+            Customers =     StaticData.GetAllCustomers(db);
 
-            Employees =     StaticData.GetAllEmployees();
+            Employees =     StaticData.GetAllEmployees(db);
 
-            Orders =        StaticData.GetAllOrders();
+            Orders =        StaticData.GetAllOrders(db);
 
-            OrdersStatuses = StaticData.GetAllOrderStatuses();
+            OrdersStatuses = StaticData.GetAllOrderStatuses(db);
 
-            OrderDetails =  StaticData.GetAllOrderDetails();
+            OrderDetails =  StaticData.GetAllOrderDetails(db);
 
-            Products =      StaticData.GetAllProducts();
+            Products =      StaticData.GetAllProducts(db);
 
-            Providers =     StaticData.GetAllProviders();
+            Providers =     StaticData.GetAllProviders(db);
 
-            Stores =        StaticData.GetAllStores();
+            Stores =        StaticData.GetAllStores(db);
         }
     } 
 }

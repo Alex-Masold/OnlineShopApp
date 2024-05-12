@@ -32,7 +32,16 @@ public partial class TypesProduct : PropertyChange
         }
     }
 
-    public virtual Category IdCategoryNavigation { get; set; } = null!;
+    private Category idCategoryNavigation;
+    public virtual Category IdCategoryNavigation 
+    {
+        get { return idCategoryNavigation; }
+        set
+        {
+            idCategoryNavigation = value;
+            OnPropertyChanged(nameof(IdCategoryNavigation));
+        }
+    }
 
     public virtual ICollection<Product> Products { get; set; } = new List<Product>();
 }

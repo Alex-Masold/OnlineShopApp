@@ -19,6 +19,7 @@ public partial class Customer : PropertyChange
         {
             nameCustomer = value;
             OnPropertyChanged(nameof(NameCustomer));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -30,6 +31,7 @@ public partial class Customer : PropertyChange
         {
             familyCustomer = value;
             OnPropertyChanged(nameof(FamilyCustomer));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -57,5 +59,18 @@ public partial class Customer : PropertyChange
 
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public string Name { get { return $"{FamilyCustomer} {NameCustomer}"; } }
+    [NotMapped]
+    public string Name { 
+        get { return $"{familyCustomer} {familyCustomer}"; } 
+        set 
+        {
+            string[] components = value.Split(' ');
+            if (components.Length == 2 )
+            {
+                familyCustomer = components[0];
+                familyCustomer = components[1];
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+    }
 }

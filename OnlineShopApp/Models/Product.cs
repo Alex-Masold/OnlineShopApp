@@ -19,6 +19,7 @@ public partial class Product : PropertyChange
         { 
             nameProduct = value;
             OnPropertyChanged(nameof(NameProduct));
+            OnPropertyChanged(nameof(Name));
         }
     }
 
@@ -100,5 +101,18 @@ public partial class Product : PropertyChange
     }
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
-    public string Name {  get { return IdTypeProductNavigation.NameTypeProduct + ' ' + NameProduct; } }
+    [NotMapped]
+    public string Name
+    {
+        get { return $"{IdTypeProductNavigation.NameTypeProduct} {nameProduct}"; }
+        set
+        {
+            string[] components = value.Split(' ');
+            if (components.Length == 2)
+            {
+                nameProduct = components[1];
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+    }
 }

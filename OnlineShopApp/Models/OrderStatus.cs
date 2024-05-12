@@ -23,9 +23,23 @@ public class OrderStatus : PropertyChange
         {
             status = value;
             OnPropertyChanged(nameof(Status));
+            OnPropertyChanged(nameof(Name));
         }
     }
     public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public string Name { get { return Status + ' ' + '(' + IdStatus + ')'; } }
+    [NotMapped]
+    public string Name
+    {
+        get { return $"{IdStatus} {status}"; }
+        set
+        {
+            string[] components = value.Split(' ');
+            if (components.Length == 2)
+            {
+                status = components[1];
+                OnPropertyChanged(nameof(Name));
+            }
+        }
+    }
 }

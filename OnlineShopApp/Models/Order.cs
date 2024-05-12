@@ -72,8 +72,8 @@ public partial class Order : PropertyChange
         get {  return  idCustomerNavigation; }
         set
         {
-            idCustomerNavigation =value;
-            OnPropertyChanged(nameof(Customer));
+            idCustomerNavigation = value;
+            OnPropertyChanged(nameof(IdCustomerNavigation));
         }
     }
 
@@ -84,7 +84,7 @@ public partial class Order : PropertyChange
         set
         {
             idOrderStatusNavigation = value;
-            OnPropertyChanged(nameof(OrderStatus));
+            OnPropertyChanged(nameof(IdOrderStatusNavigation));
         }
     }
 
@@ -122,7 +122,11 @@ public partial class Order : PropertyChange
             }
             return totalCost;
         } 
-    } 
+    }
 
-    public string Name { get { return IdOrder + " " + DateOrder.ToString(); } }
+    [NotMapped]
+    public string Name
+    {
+        get { return $"{IdOrder} {dateOrder}"; }
+    }
 }

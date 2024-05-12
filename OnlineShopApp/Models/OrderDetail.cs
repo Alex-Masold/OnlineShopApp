@@ -49,6 +49,7 @@ public partial class OrderDetail : PropertyChange
         {
             countProduct = value;
             OnPropertyChanged(nameof(CountProduct));
+            OnPropertyChanged(nameof(Price));
         }
     }
 
@@ -74,11 +75,12 @@ public partial class OrderDetail : PropertyChange
         }
     }
 
+    [NotMapped]
     public int Price 
     { 
         get 
         { 
-            return (int)(IdProductNavigation.PriceProduct * CountProduct); 
+            return (int)(IdProductNavigation.PriceProduct * countProduct); 
         } 
     
     }

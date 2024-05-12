@@ -4,17 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OnlineShopApp.Views.Controls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <DockPanel Margin="15">
-        <Button DockPanel.Dock="Bottom"
-                Content="Add"
-                Margin="5" />
-        <ListView DockPanel.Dock="Top"
+        <ListView x:Name="OrderDetails"
+                  DockPanel.Dock="Top"
                   Background="#FF393939"
                   Foreground="#FFC9C9C9"
                   ItemsSource="{Binding OrderDetails}"
                   SelectedItem="{Binding SelectedItem}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding AddCommand}"
+                                           CommandParameter="{Binding ElementName=OrderDetails}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id">
@@ -53,7 +58,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding IdProductNavigation.NameProduct}" />
+                                    <TextBlock Text="{Binding IdProductNavigation.Name}" />
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
@@ -75,6 +80,27 @@
                             <DataTemplate>
                                 <StackPanel>
                                     <TextBlock Text="{Binding CountProduct}" />
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Price">
+                        <GridViewColumn.HeaderTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBox Text="Price" />
+                                    <ComboBox>
+                                        <CheckBox />
+                                    </ComboBox>
+                                </StackPanel>
+                            </DataTemplate>
+                        </GridViewColumn.HeaderTemplate>
+
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding Price}" />
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

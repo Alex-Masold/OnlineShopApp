@@ -4,31 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:OnlineShopApp.Views.Controls"
+             xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <!--<GridViewColumn.HeaderTemplate>
+    <DataTemplate>
+        <StackPanel Orientation="Horizontal">
+            <TextBox Text="Id" />
+            <ComboBox>
+                <CheckBox />
+            </ComboBox>
+        </StackPanel>
+    </DataTemplate>
+</GridViewColumn.HeaderTemplate>-->
     <DockPanel Margin="15">
-        <Button DockPanel.Dock="Bottom"
-                Content="Add"
-                Margin="5" />
-        <ListView DockPanel.Dock="Top"
+        <ListView x:Name="TypesProducts"
+                  DockPanel.Dock="Top"
                   Background="#393939"
                   Foreground="#C9C9C9"
                   ItemsSource="{Binding TypesProducts}"
                   SelectedItem="{Binding SelectedItem}">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="MouseDoubleClick">
+                    <i:InvokeCommandAction Command="{Binding AddCommand}"
+                                           CommandParameter="{Binding ElementName=TypesProducts}" />
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Id">
-                        <GridViewColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="Id" />
-                                    <ComboBox>
-                                        <CheckBox />
-                                    </ComboBox>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridViewColumn.HeaderTemplate>
-
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding IdTypeProduct}" />
@@ -37,17 +41,6 @@
                     </GridViewColumn>
 
                     <GridViewColumn Header="Name">
-                        <GridViewColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="Name" />
-                                    <ComboBox>
-                                        <CheckBox />
-                                    </ComboBox>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridViewColumn.HeaderTemplate>
-
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
@@ -58,17 +51,6 @@
                     </GridViewColumn>
 
                     <GridViewColumn Header="IdCategory">
-                        <GridViewColumn.HeaderTemplate>
-                            <DataTemplate>
-                                <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="Category" />
-                                    <ComboBox>
-                                        <CheckBox />
-                                    </ComboBox>
-                                </StackPanel>
-                            </DataTemplate>
-                        </GridViewColumn.HeaderTemplate>
-
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
