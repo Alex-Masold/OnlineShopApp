@@ -121,7 +121,7 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding IdStore}" />
+                                    <TextBlock Text="{Binding IdStoreNavigation.Name}" />
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>

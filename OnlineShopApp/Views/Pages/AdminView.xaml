@@ -4,58 +4,81 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:Control="clr-namespace:OnlineShopApp.Views.Controls"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
       mc:Ignorable="d"
       d:DesignHeight="450"
       d:DesignWidth="900"
       Title="AdminView">
 
-    <DockPanel x:Name="AdminPanel" Margin="15,15,15,15" Background="#FF313131">
-        <!--<Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>-->
-        <TabControl Background="Transparent"
+    <DockPanel x:Name="AdminPanel"
+               Margin="15,15,15,15"
+               Background="#FF313131">
+        <ui:TabView Background="Transparent"
                     TabStripPlacement="Left">
-            <TabItem Header="CATEGORIES">
+            <TabItem Header="CATEGORIES"
+                     Foreground="White">
                 <Control:CategoriesControl />
             </TabItem>
-            
-            <TabItem Header="TYPES PRODUCT">
+
+            <TabItem Header="TYPES PRODUCT"
+                     Foreground="White">
                 <Control:TypesProductControl />
             </TabItem>
 
-            <TabItem Header="CUSTOMERS">
+            <TabItem Header="CUSTOMERS"
+                     Foreground="White">
                 <Control:CustomersControl />
             </TabItem>
 
-            <TabItem Header="EMPLOYEES">
+            <TabItem Header="EMPLOYEES"
+                     Foreground="White">
                 <Control:EmployeesControl />
             </TabItem>
 
-            <TabItem Header="ORDERS">
+            <TabItem Header="ORDERS"
+                     Foreground="White">
                 <Control:OrdersControl />
             </TabItem>
 
-            <TabItem Header="ORDER STATUS">
+            <TabItem Header="ORDER STATUS"
+                     Foreground="White">
                 <Control:OrderStatusesControl />
             </TabItem>
 
-            <TabItem Header="ORDER DETAILS">
+            <TabItem Header="ORDER DETAILS"
+                     Foreground="White">
                 <Control:OrderDetailsControl />
             </TabItem>
 
-            <TabItem Header="PROVIDERS">
+            <TabItem Header="PROVIDERS"
+                     Foreground="White">
                 <Control:ProvidersControl />
             </TabItem>
 
-            <TabItem Header="PRODUCTS">
+            <TabItem Header="PRODUCTS"
+                     Foreground="White">
                 <Control:ProductsControl />
             </TabItem>
 
-            <TabItem Header="STORES">
+            <TabItem Header="STORES"
+                     Foreground="White">
                 <Control:StoresControl />
             </TabItem>
-        </TabControl>
-        <Control:EditControl/>
+        </ui:TabView>
+        <Control:EditControl x:Name="EditControl"/>
+        <Popup x:Name="Notification"
+               PopupAnimation="Slide"
+               PlacementTarget="{Binding ElementName=EditControl}"   
+               Placement="Left"
+               AllowsTransparency="True">
+            <Border Background="#313131"
+                    CornerRadius="5"
+                    Padding="10"
+                    BorderBrush="Gray"
+                    BorderThickness="1">
+                <TextBlock Text="{Binding Message}"
+                           Foreground="White" />
+            </Border>
+        </Popup>
     </DockPanel>
 </Page>

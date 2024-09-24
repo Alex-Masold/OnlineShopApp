@@ -8,16 +8,7 @@ namespace OnlineShopApp.Models;
 
 public partial class OrderDetail : PropertyChange
 {
-    [NotMapped]
-    private int idDetail;
-    public int IdDetail {
-        get {  return idDetail; } 
-        set 
-        {
-            idDetail = value;
-            OnPropertyChanged(nameof(IdDetail));
-        }
-    }
+    public int IdDetail { get; set; }
 
     [NotMapped]
     private int? idOrder;
@@ -80,7 +71,10 @@ public partial class OrderDetail : PropertyChange
     { 
         get 
         { 
-            return (int)(IdProductNavigation.PriceProduct * countProduct); 
+            if (idProductNavigation == null)
+                return 0;
+            else 
+                return (int)(IdProductNavigation.PriceProduct * countProduct); 
         } 
     
     }

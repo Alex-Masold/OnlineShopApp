@@ -1,144 +1,80 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Castle.Core.Resource;
+using Microsoft.EntityFrameworkCore;
 using OnlineShop.Models.Base;
 using OnlineShop.Models.Data;
 using OnlineShopApp.DataSource;
 using OnlineShopApp.Models;
 using System.Collections.ObjectModel;
+using System.IO.Packaging;
+using System.Reflection.Metadata.Ecma335;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
 
 namespace OnlineShop.ViewModel
 {
     public class AdminViewModel : PropertyChange
     {
-        #region Категории
-        public ObservableCollection<Category> Categories { get; set; }
-        #endregion
-
-        #region Типы Продуктов
-        private ObservableCollection<TypesProduct> typesProducts;
-        public ObservableCollection<TypesProduct> TypesProducts
-        {
-            get { return typesProducts; }
-            set
-            {
-                typesProducts = value;
-                OnPropertyChanged(nameof(TypesProducts));
-            }
-        }
-        #endregion
-
-        #region Сотрудники
-        private ObservableCollection<Employee> employees;
-        public ObservableCollection<Employee> Employees
-        {
-            get { return employees; }
-            set
-            {
-                employees = value;
-                OnPropertyChanged(nameof(Employees));
-            }
-        }
-        #endregion
-
-        #region Клиенты
-        private ObservableCollection<Customer> customers;
-        public ObservableCollection<Customer> Customers
-        {
-            get { return customers; }           
-            set
-            {
-                customers = value;
-                OnPropertyChanged(nameof(Customers));
-            }
-        }
-        #endregion
-
-        #region Статусы Заказа
-        private ObservableCollection<OrderStatus> ordersStatuses;
-        public ObservableCollection<OrderStatus> OrdersStatuses
-        {
-            get { return ordersStatuses; }
-            set
-            {
-                ordersStatuses = value;
-                OnPropertyChanged(nameof(OrdersStatuses));
-            }
-        }
-        #endregion
-
-        #region Заказы
-        private ObservableCollection<Order> orders;
-        public ObservableCollection<Order> Orders
-        {
-            get { return orders; }
-            set
-            {
-                orders = value;
-                OnPropertyChanged(nameof(Orders));
-            }
-        }
-        #endregion
-
-        #region Детали Заказа
-        private ObservableCollection<OrderDetail> orderDetails;
-        public ObservableCollection<OrderDetail> OrderDetails
-        {
-            get { return orderDetails; }
-            set
-            {
-                orderDetails = value;
-                OnPropertyChanged(nameof(OrderDetails));
-            }
-        }
-        #endregion
-
-        #region Поставщики
-        private ObservableCollection<Provider> providers;
-        //private ObservableCollection<Provider> providers;
-        public ObservableCollection<Provider> Providers
-        {
-            get { return providers; }
-            set
-            {
-                providers = value;
-                OnPropertyChanged(nameof(Providers));
-            }
-        }
-        #endregion
-
-        #region Продукты
-        private ObservableCollection<Product> products;
-        public ObservableCollection<Product> Products
-        {
-            get { return products; }
-            set
-            {
-                products = value;
-                OnPropertyChanged(nameof(Products));
-            }
-        }
-        #endregion
-
-        #region Магазины
-        private ObservableCollection<Store> stores;
-        //private ObservableCollection<Store> stores;
-        public ObservableCollection<Store> Stores
-        {
-            get { return stores; }
-            set
-            {
-                stores = value;
-                OnPropertyChanged(nameof(Stores));
-            }
-        }
-        #endregion
-
         private ApplicationContext db = new ApplicationContext();
 
         private string oldString;
         private int oldInt;
         private double oldDouble;
+        private DispatcherTimer timer;
+
+        #region Категории
+        public ObservableCollection<Category> Categories { get; set; }
+        #endregion
+
+        #region Типы Продуктов
+        public ObservableCollection<TypesProduct> TypesProducts { get; set; }
+        #endregion
+
+        #region Сотрудники
+        public ObservableCollection<Employee> Employees { get; set; }
+        #endregion
+
+        #region Клиенты
+        public ObservableCollection<Customer> Customers { get; set; }
+        #endregion
+
+        #region Статусы Заказа
+        public ObservableCollection<OrderStatus> OrderStatuses { get; set; }
+        #endregion
+
+        #region Заказы
+        public ObservableCollection<Order> Orders { get; set; }
+        #endregion
+
+        #region Детали Заказа
+        public ObservableCollection<OrderDetail> OrderDetails { get; set; }
+        #endregion
+
+        #region Поставщики
+        public ObservableCollection<Provider> Providers { get; set; }
+        #endregion
+
+        #region Продукты
+        public ObservableCollection<Product> Products { get; set; }
+        #endregion
+
+        #region Магазины
+        public ObservableCollection<Store> Stores { get; set; }
+        #endregion
+
+        Popup Notification { get; set; }
+
+        private string message; 
+        public string Message
+        {
+            get { return message; }
+            set
+            {
+                message = value;
+                OnPropertyChanged(nameof(Message));
+            }
+        }
 
         private object selectedItem;
         public object SelectedItem
@@ -157,11 +93,13 @@ namespace OnlineShop.ViewModel
             {
                 if (newVersion == oldString)
                 {
-                    MessageBox.Show("Изменений нет");
+                    Message = "Изменений Нет";
+                    Open();
                 }
                 else
                 {
-                    MessageBox.Show($"{oldString} -> {newVersion}");
+                    Message = ($"{oldString} -> {newVersion}");
+                    Open();
                     db.Entry(SelectedItem).State = EntityState.Modified;
                     db.SaveChanges();
                 }
@@ -191,66 +129,406 @@ namespace OnlineShop.ViewModel
             {
                 if (newVersion == oldDouble)
                 {
-                    MessageBox.Show("Изменений нет");
+                    Message = "Изменений Нет";
+                    Open();
                 }
                 else
                 {
-                    MessageBox.Show($"{oldString} -> {newVersion}");
+                    Message = ($"{oldDouble} -> {newVersion}");
+                    Open();
                     db.Entry(SelectedItem).State = EntityState.Modified;
                     db.SaveChanges();
                 }
 
             }
         }
-        private void Change()
+
+        private void Open()
         {
-            using (ApplicationContext db = new ApplicationContext())
+            
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(2); // Закроется через 5 секунд
+            timer.Tick += Close;
+
+            Notification.IsOpen = true;
+
+            timer.Start();
+        }
+        private void Close(object sender, EventArgs e)
+        {
+            Notification.IsOpen = false;
+
+            // Останавливаем таймер
+            timer.Stop();
+        }
+
+        private void TextBoxGotFocus(string name)
+        {
+            switch (SelectedItem)
             {
-                db.Entry(SelectedItem).State = EntityState.Modified;
-                db.SaveChanges();
+                case Category category:
+                    oldString = category.NameCategory;
+                    break;
+                case Customer customer:
+                    switch (name)
+                    {
+                        case "Name":
+                            oldString = customer.NameCustomer; 
+                            break;
+                        case "Family":
+                            oldString = customer.FamilyCustomer;
+                            break;
+                        case "Email":
+                            oldString = customer.EmailCustomer;
+                            break;
+                        case "Password":
+                            oldString = customer.PasswordCustomer;
+                            break;
+                    }
+                    break;
+                case Employee employee:
+                    switch (name)
+                    {
+                        case "Name":
+                            oldString = employee.NameEmployee;
+                            break;
+                        case "Family":
+                            oldString = employee.FamilyEmployee;
+                            break;
+                        case "Email":
+                            oldString = employee.EmailEmployee;
+                            break;
+                        case "Password":
+                            oldString = employee.PasswordEmployee;
+                            break;
+                        case "Salary":
+                            oldInt = (int)employee.SalaryEmployee;
+                            break;
+                    }
+                    break;
+                case OrderStatus orderStatus:
+                    oldString = orderStatus.NameStatus;
+                    break;
+                case OrderDetail orderDetail:
+                    oldInt = (int)orderDetail.CountProduct;
+                    break;
+                case Provider provider:
+                    oldString = provider.NameProvider;
+                    break;
+                case Product product:
+                    switch (name)
+                    {
+                        case "Name":
+                            oldString = product.NameProduct;
+                            break;
+                        case "Quantity":
+                            oldInt = (int)product.QuantityProduct;
+                            break;
+                        case "Price":
+                            oldInt = (int)product.PriceProduct;
+                            break;
+                    }
+                    break;
+                case Store store:
+                   switch (name)
+                    {
+                        case "City":
+                            oldString = store.CityStore;
+                            break;
+                        case "Street":
+                            oldString = store.StreetStore;
+                            break;
+                        case "House":
+                            oldString = store.HouseStore;
+                            break;
+                        case "House_Number":
+                            oldString = store.NumberStore;
+                            break;
+                    }
+                    break;
+                case TypesProduct typesProduct:
+                    oldString = typesProduct.NameTypeProduct;
+                    break;
+            }
+        }
+        private void ComboBoxGotFocus(string name)
+        {
+            switch (SelectedItem)
+            {
+                case Employee employee:
+                    switch (employee.IdStoreNavigation)
+                    {
+                        case null:
+                            oldString = "";
+                            break;
+                        default:
+                            oldString = employee.IdStoreNavigation.Name;
+                            break;
+                    }
+                    break;
+                case Order order: 
+                    switch (name)
+                    {
+                        case "StatusComboBox":
+                            switch (order.IdOrderStatusNavigation)
+                            {
+                                case null:
+                                    oldString = "";
+                                    break;
+                                default:
+                                    oldString = order.IdOrderStatusNavigation.Name;
+                                    break;
+                            }
+                            break;
+                        case "CustomersComboBox":
+                            switch (order.IdCustomerNavigation)
+                            {
+                                case null:
+                                    oldString = "";
+                                    break;
+                                default:
+                                    oldString = order.IdCustomerNavigation.Name;
+                                    break;
+                            }
+                            break;
+                        case "StoresComboBox":
+                            switch (order.IdStoreNavigation)
+                            {
+                                case null:
+                                    oldString = "";
+                                    break;
+                                default:
+                                    oldString = order.IdStoreNavigation.Name;
+                                    break;
+                            }
+                            break;
+                        case "EmployeeComboBox":
+
+                            switch (order.IdEmployeeNavigation)
+                            {
+                                case null:
+                                    oldString = "";
+                                    break;
+                                default:
+                                    oldString = order.IdEmployeeNavigation.Name;
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case OrderDetail orderDetail:
+                    switch (name)
+                    {
+                        case "OrdersComboBox":
+                            switch (orderDetail.IdOrderNavigation)
+                            {
+                                case null:
+                                    oldString = "";
+                                    break;
+                                default:
+                                    oldString = orderDetail.IdOrderNavigation.Name;
+                                    break;
+                            }
+                            break;
+                        case "ProductsComboBox":
+                            switch (orderDetail.IdProductNavigation)
+                            {
+                                case null:
+                                    oldString = "";
+                                    break; 
+                                default:
+                                    oldString = orderDetail.IdProductNavigation.Name;
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case Product product:
+                    switch (name)
+                    {
+                        case "TypesProductsComboBox":
+                            switch (product.IdTypeProductNavigation)
+                            {
+                                case null:
+                                    oldString = "";
+                                    break;
+                                default :
+                                    oldString = product.IdTypeProductNavigation.NameTypeProduct;
+                                    break;
+                            }
+                            break;
+                        case "ProvidersComboBox":
+                            switch (product.IdProviderNavigation)
+                            {
+                                case null:
+                                    oldString = "";
+                                    break;
+                                default:
+                                    oldString = product.IdProviderNavigation.NameProvider;
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case TypesProduct typesProduct:
+                    switch (typesProduct.IdCategoryNavigation)
+                    {
+                        case null:
+                            oldString = "";
+                            break;
+                        default:
+                            oldString = typesProduct.IdCategoryNavigation.NameCategory;
+                            break;
+
+                    }
+                    break;
             }
         }
 
-        private void Test(string newVersion)
+        private void SelectionChanged(string name)
         {
-            if (newVersion == oldString)
+            switch (SelectedItem)
             {
-                MessageBox.Show("Изменений нет");
+                case Employee employee:
+                    switch (employee.IdStoreNavigation)
+                    {
+                        case null:
+                            Message = "Магазин не был выбран";
+                            Open();
+                            break;
+                        default:
+                            Change(employee.IdStoreNavigation.Name);
+                            break;
+                    }
+                    break;
+                case Order order:
+                    switch (name)
+                    {
+                        case "StatusComboBox":
+                            switch (order.IdOrderStatusNavigation)
+                            {
+                                case null:
+                                    Message = "Статус не был выбран";
+                                    Open();
+                                    break;
+                                default:
+                                    Change(order.IdOrderStatusNavigation.NameStatus);
+                                    break;
+                            }
+                            break;
+                        case "CustomersComboBox":
+                            switch (order.IdCustomerNavigation)
+                            {
+                                case null:
+                                    Message = "Клиент не был выбран";
+                                    Open();
+                                    break;
+                                default:
+                                    Change(order.IdCustomerNavigation.Name);
+                                    break;
+                            }
+                            break;
+                        case "StoresComboBox":
+                            switch (order.IdStoreNavigation)
+                            {
+                                case null:
+                                    Message = "Магазин не был выбран";
+                                    Open();
+                                    break;
+                                default:
+                                    Change(order.IdStoreNavigation.Name);
+                                    break;
+                            }
+                            break;
+                        case "EmployeeComboBox":
+                            switch (order.IdEmployeeNavigation)
+                            {
+                                case null:
+                                    Message = "Сотрудник не был выбран";
+                                    Open();
+                                    break;
+                                default:
+                                    Change(order.IdEmployeeNavigation.Name);
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case OrderDetail orderDetail:
+                    switch (name)
+                    {
+                        case "OrdersComboBox":
+                            switch (orderDetail.IdOrderNavigation)
+                            {
+                                case null:
+                                    Message = "Заказ не был выбран";
+                                    Open();
+                                    break; 
+                                default:
+                                    Change(orderDetail.IdOrderNavigation.Name);
+                                    break;
+                            }
+                            break;
+                        case "ProductsComboBox":
+                            switch (orderDetail.IdProductNavigation)
+                            {
+                                case null:
+                                    Message = "Продукт не был выбран";
+                                    Open();
+                                    break;
+                                default:
+                                    Change(orderDetail.IdProductNavigation.Name);
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case Product product:
+                    switch (name)
+                    {
+                        case "TypesProductsComboBox":
+                            switch (product.IdTypeProductNavigation)
+                            {
+                                case null:
+                                    Message = "Тип продукта не был выбран";
+                                    Open();
+                                    break;
+                                default:
+                                    Change(product.IdTypeProductNavigation.NameTypeProduct);
+                                    break;
+                            }
+                            break;
+                        case "ProvidersComboBox":
+                            switch (product.IdProviderNavigation)
+                            {
+                                case null:
+                                    Message = "Продукт не был выбран";
+                                    Open();
+                                    break;
+                                default:
+                                    Change(product.IdProviderNavigation.NameProvider);
+                                    break;
+                            }
+                            break;
+                    }
+                    break;
+                case TypesProduct typesProduct:
+                    switch (typesProduct.IdCategoryNavigation)
+                    {
+                        case null:
+                            Message = "Категория не был выбран";
+                            Open();
+                            break;
+                        default:
+                            Change(typesProduct.IdCategoryNavigation.NameCategory);
+                            break;
+                    }
+                    break;
             }
-            else
-            {
-                MessageBox.Show($"{oldString} -> {newVersion}");
-            }
-
         }
-        private void Test(int newVersion)
+        private void Add(string name)
         {
-            if (newVersion == oldInt)
-            {
-                MessageBox.Show("Изменений нет");
-            }
-            else
-            {
-                MessageBox.Show($"{oldInt} -> {newVersion}");
-            }
-
-        }
-        private void Test(double newVersion)
-        {
-            if (newVersion == oldDouble)
-            {
-                MessageBox.Show("Изменений нет");
-            }
-            else
-            {
-                MessageBox.Show($"{oldDouble} -> {newVersion}");
-            }
-
-        }
-
-        private void Add(string Name)
-        {
-            switch (Name)
+            switch (name)
             {
                 case "Categories":
                     Category newCategory = new Category();
@@ -295,6 +573,55 @@ namespace OnlineShop.ViewModel
                     break;
             }   
         }
+        private void Delete()
+        {
+            switch (SelectedItem)
+            {
+                case Category _:
+                    db.Categories.Remove((Category)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case TypesProduct _:
+                    db.TypesProducts.Remove((TypesProduct)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case Customer _:
+                    db.Customers.Remove((Customer)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case Employee _:
+                    db.Employees.Remove((Employee)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case OrderStatus _:
+                    db.OrderStatuses.Remove((OrderStatus)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case Order _:
+                    db.Orders.Remove((Order)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case OrderDetail _:
+                    db.OrderDetails.Remove((OrderDetail)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case Provider _:
+                    db.Providers.Remove((Provider)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case Product _:
+                    db.Products.Remove((Product)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                case Store _:
+                    db.Stores.Remove((Store)SelectedItem);
+                    db.SaveChanges();
+                    break;
+                default:
+                    MessageBox.Show("Объект не выбран");
+                    break;
+            }
+        }
 
         private RelayCommand gotFocusCommand;
         public RelayCommand GotFocusCommand
@@ -303,126 +630,30 @@ namespace OnlineShop.ViewModel
             {
                 return gotFocusCommand ?? (gotFocusCommand = new RelayCommand(obj =>
                 {
-                    TextBox textBox = obj as TextBox;
-                    if (textBox != null)
+                    switch (obj)
                     {
-                        textBox.FontSize *= 1.2;
-
-                        if (SelectedItem is Category)
-                        {
-                            Category category = (Category)SelectedItem;
-                            oldString = category.NameCategory;
-                        }
-                        else if (SelectedItem is TypesProduct)
-                        {
-                            TypesProduct typesProduct = (TypesProduct)SelectedItem;
-                            oldString = typesProduct.NameTypeProduct;
-                        }
-                        else if (SelectedItem is Customer)
-                        {
-                            Customer customer = (Customer)SelectedItem;
-                            if (textBox.Name == "Name")
-                            {
-                                oldString = customer.NameCustomer;
-                            }
-                            if (textBox.Name == "Family")
-                            {
-                                oldString = customer.FamilyCustomer;
-                            }
-                            if (textBox.Name == "Email")
-                            {
-                                oldString = customer.EmailCustomer;
-                            }
-                            if (textBox.Name == "Password")
-                            {
-                                oldString = customer.PasswordCustomer;
-                            }
-                        }
-                        else if (SelectedItem is Employee)
-                        {
-                            Employee employee = (Employee)SelectedItem;
-                            if (textBox.Name == "Name")
-                            {
-                                oldString = employee.NameEmployee;
-                            }
-                            else if (textBox.Name == "Family")
-                            {
-                                oldString = employee.FamilyEmployee;
-                            }
-                            else if (textBox.Name == "Email")
-                            {
-                                oldString = employee.EmailEmployee;
-                            }
-                            else if (textBox.Name == "Password")
-                            {
-                                oldString = employee.PasswordEmployee;
-                            }
-                            else if (textBox.Name == "Salary")
-                            {
-                                oldInt = (int)employee.SalaryEmployee;
-                            }
-                        }
-                        else if (SelectedItem is OrderStatus)
-                        {
-                            OrderStatus orderStatus = (OrderStatus)SelectedItem;
-                            oldString = orderStatus.Status;
-                        }
-                        else if (SelectedItem is OrderDetail)
-                        {
-                            OrderDetail orderDetail = (OrderDetail)SelectedItem;
-                            oldInt = (int)orderDetail.CountProduct;
-                        }
-                        else if (SelectedItem is Provider)
-                        {
-                            Provider provider = (Provider)SelectedItem;
-                            oldString = provider.NameProvider;
-                        }
-                        else if (SelectedItem is Product)
-                        {
-                            Product product = (Product)SelectedItem;
-                            if (textBox.Name == "Name")
-                            {
-                                oldString = product.NameProduct;
-                            }
-                            else if (textBox.Name == "Quantity")
-                            {
-                                oldInt = (int)product.QuantityProduct;
-                            }
-                            else if (textBox.Name == "Rating")
-                            {
-                                oldDouble = (double)product.RatingProduct;
-                            }
-                            else if (textBox.Name == "Price")
-                            {
-                                oldInt = (int)product.PriceProduct;
-                            }
-                        }
-                        else if (SelectedItem is Store)
-                        {
-                            Store store = (Store)SelectedItem;
-                            if (textBox.Name == "City")
-                            {
-                                oldString = store.CityStore;
-                            }
-                            else if (textBox.Name == "Street")
-                            {
-                                oldString = store.StreetStore;
-                            }
-                            else if (textBox.Name == "House")
-                            {
-                                oldString = store.HouseStore;
-                            }
-                            else if (textBox.Name == "House_Number")
-                            {
-                                oldString = store.NumberStore;
-                            }
-                            else if (textBox.Name == "Rating")
-                            {
-                                oldDouble = (double)store.RatingStore;
-                            }
-                        }
+                        case TextBox textBox:
+                            textBox.FontSize *= 1.2;
+                            TextBoxGotFocus(textBox.Name);
+                            break;
                     }
+                }));
+            }
+        }
 
+        private RelayCommand dropDownCommand;
+        public RelayCommand DropDownCommand
+        {
+            get
+            {
+                return dropDownCommand ?? (dropDownCommand = new RelayCommand(obj => 
+                {
+                    switch (obj)
+                    {
+                        case ComboBox comboBox:
+                            ComboBoxGotFocus(comboBox.Name);
+                            break;
+                    }
                 }));
             }
         }
@@ -591,19 +822,8 @@ namespace OnlineShop.ViewModel
                     ComboBox comboBox = obj as ComboBox;
                     if (comboBox != null)
                     {
-                        //if (SelectedItem is TypesProduct)
-                        //{
-                            //TypesProduct typesProduct = (TypesProduct)SelectedItem;
-                            //Category category = (Category)comboBox.SelectedItem;
-                            //string newString = category.NameCategory;
-                            //oldString = typesProduct.IdCategoryNavigation.NameCategory;
-
-                            Change();
-                            
-                            //Test(newString);
-                        //}
+                        SelectionChanged(comboBox.Name);
                     }
-                        
                  }));
             }
         }
@@ -631,11 +851,12 @@ namespace OnlineShop.ViewModel
             {
                 return deleteCommand ?? (new RelayCommand(obj =>
                 {
-
+                    Delete();
                 }));
             }
         }
-        public AdminViewModel()
+
+        public AdminViewModel(Popup notification)
         {
             Categories =    StaticData.GetAllCategories(db);
 
@@ -647,7 +868,7 @@ namespace OnlineShop.ViewModel
 
             Orders =        StaticData.GetAllOrders(db);
 
-            OrdersStatuses = StaticData.GetAllOrderStatuses(db);
+            OrderStatuses = StaticData.GetAllOrderStatuses(db);
 
             OrderDetails =  StaticData.GetAllOrderDetails(db);
 
@@ -656,6 +877,8 @@ namespace OnlineShop.ViewModel
             Providers =     StaticData.GetAllProviders(db);
 
             Stores =        StaticData.GetAllStores(db);
+
+            Notification=notification;
         }
     } 
 }

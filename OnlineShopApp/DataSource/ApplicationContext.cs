@@ -9,7 +9,6 @@ public partial class ApplicationContext : DbContext
 {
 	public ApplicationContext()
 	{
-        Database.EnsureCreated();
     }
 
 	public ApplicationContext(DbContextOptions<ApplicationContext> options)
@@ -107,7 +106,7 @@ public partial class ApplicationContext : DbContext
 				.HasColumnName("PASSWORD_EMPLOYEE");
 			entity.Property(e => e.SalaryEmployee).HasColumnName("SALARY_EMPLOYEE");
 
-			entity.HasOne(d => d.IdStoreNavigation).WithMany(p => p.Employees).OnDelete(DeleteBehavior.ClientCascade)
+			entity.HasOne(d => d.IdStoreNavigation).WithMany(p => p.Employees).OnDelete(DeleteBehavior.Cascade) // TODO
 				.HasForeignKey(d => d.IdStore)
 				.HasConstraintName("FK_EMPLOYEES_STORES");
 		});
@@ -127,17 +126,17 @@ public partial class ApplicationContext : DbContext
 
 			entity.HasOne(d => d.IdOrderStatusNavigation).WithMany(p => p.Orders)
 				  .HasForeignKey(d => d.IdOrderStatus)
-				  .OnDelete(DeleteBehavior.ClientSetNull)
+				  .OnDelete(DeleteBehavior.Cascade)
 				  .HasConstraintName("FK_ORDERS_ORDER_STATUS");
 
 			entity.HasOne(d => d.IdCustomerNavigation).WithMany(p => p.Orders)
 				.HasForeignKey(d => d.IdCustomer)
-				.OnDelete(DeleteBehavior.Cascade)
+				.OnDelete(DeleteBehavior.NoAction)
 				.HasConstraintName("FK_ORDERS_CUSTOMERS");
 
 			entity.HasOne(d => d.IdStoreNavigation).WithMany(p => p.Orders)
 				  .HasForeignKey(d => d.IdStore)
-				  .OnDelete(DeleteBehavior.NoAction)
+				  .OnDelete(DeleteBehavior.Cascade) // TODO
 				  .HasConstraintName("FK_ORDERS_STORE");
 
             entity.HasOne(d => d.IdEmployeeNavigation).WithMany(p => p.Orders)
@@ -151,7 +150,7 @@ public partial class ApplicationContext : DbContext
 			entity.ToTable("ORDER_STATUS");
 
 			entity.Property(e => e.IdStatus).HasColumnName("ID_STATUS");
-			entity.Property(e => e.Status).HasColumnName("STATUS");
+			entity.Property(e => e.NameStatus).HasColumnName("NAME_STATUS");
         });
 
 		modelBuilder.Entity<OrderDetail>(entity =>
@@ -172,7 +171,7 @@ public partial class ApplicationContext : DbContext
 
 			entity.HasOne(d => d.IdProductNavigation).WithMany(p => p.OrderDetails)
 				.HasForeignKey(d => d.IdProduct)
-				.OnDelete(DeleteBehavior.SetNull)
+				.OnDelete(DeleteBehavior.NoAction) // TODO
 				.HasConstraintName("FK_ORDER_DETAILS_PRODUCTS");
 		});
 
@@ -258,7 +257,7 @@ public partial class ApplicationContext : DbContext
 
 			entity.HasOne(d => d.IdCategoryNavigation).WithMany(p => p.TypesProducts)
 				.HasForeignKey(d => d.IdCategory)
-				.OnDelete(DeleteBehavior.Cascade)
+				.OnDelete(DeleteBehavior.Cascade) // TODO
 				.HasConstraintName("FK_TYPES_PRODUCT_CATEGORIES");
 		});
 

@@ -21,11 +21,53 @@
             </i:Interaction.Triggers>
             <ListView.View>
             <GridView>
-                    <GridViewColumn Header="Id">
+                <GridViewColumn Header="Id">
+                    <GridViewColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="Id" />
+                                <ComboBox>
+                                    <CheckBox />
+                                </ComboBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridViewColumn.HeaderTemplate>
+
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding IdOrder}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+
+                <GridViewColumn Header="Id">
+                    <GridViewColumn.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBox Text="Status" />
+                                <ComboBox>
+                                    <CheckBox />
+                                </ComboBox>
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridViewColumn.HeaderTemplate>
+
+                    <GridViewColumn.CellTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                    <TextBlock Text="{Binding IdOrderStatusNavigation.NameStatus}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </GridViewColumn.CellTemplate>
+                </GridViewColumn>
+
+                    <GridViewColumn Header="Id Customer">
                         <GridViewColumn.HeaderTemplate>
                             <DataTemplate>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="Id" />
+                                    <TextBox Text="Customer" />
                                     <ComboBox>
                                         <CheckBox />
                                     </ComboBox>
@@ -36,53 +78,32 @@
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <StackPanel>
-                                    <TextBlock Text="{Binding IdOrder}" />
+                                    <TextBlock Text="{Binding IdCustomerNavigation.Name}" />
                                 </StackPanel>
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Id Customer">
-                    <GridViewColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBox Text="Customer" />
-                                <ComboBox>
-                                    <CheckBox />
-                                </ComboBox>
-                            </StackPanel>
-                        </DataTemplate>
-                    </GridViewColumn.HeaderTemplate>
-
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                    <TextBlock Text="{Binding IdCustomerNavigation.Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
-
                     <GridViewColumn Header="Store">
-                    <GridViewColumn.HeaderTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                    <TextBox Text="Store" />
-                                <ComboBox>
-                                    <CheckBox />
-                                </ComboBox>
-                            </StackPanel>
-                        </DataTemplate>
-                    </GridViewColumn.HeaderTemplate>
+                <GridViewColumn.HeaderTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Horizontal">
+                                <TextBox Text="Store" />
+                            <ComboBox>
+                                <CheckBox />
+                            </ComboBox>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridViewColumn.HeaderTemplate>
 
-                    <GridViewColumn.CellTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                    <TextBlock Text="{Binding IdStoreNavigation.Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </GridViewColumn.CellTemplate>
-                </GridViewColumn>
+                <GridViewColumn.CellTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                                <TextBlock Text="{Binding IdStoreNavigation.Name}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridViewColumn.CellTemplate>
+            </GridViewColumn>
 
                 <GridViewColumn Header="Date">
                     <GridViewColumn.HeaderTemplate>

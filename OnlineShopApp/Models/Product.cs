@@ -101,6 +101,7 @@ public partial class Product : PropertyChange
     }
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+
     [NotMapped]
     public string Name
     {

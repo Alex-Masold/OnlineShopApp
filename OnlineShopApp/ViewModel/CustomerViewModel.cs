@@ -251,7 +251,7 @@ namespace OnlineShop.ViewModel
         {
             Customer = _customer;
             Products = StaticData.GetAllProducts(db);
-            NewOrder = Customer.Orders.FirstOrDefault(_order => _order.IdOrderStatusNavigation.Status == "В корзине") ?? null;
+            NewOrder = Customer.Orders.FirstOrDefault(_order => _order.IdOrderStatusNavigation.NameStatus == "В корзине") ?? null;
         }
     }
 }

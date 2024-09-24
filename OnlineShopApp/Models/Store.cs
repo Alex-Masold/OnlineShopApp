@@ -46,13 +46,13 @@ public partial class Store : PropertyChange
         }
     }
 
-    private string? numderStore;
+    private string? numberStore;
     public string? NumberStore 
     { 
-        get { return numderStore; }
+        get { return numberStore; }
         set
         {
-            numderStore = value;
+            numberStore = value;
             OnPropertyChanged(nameof(NumberStore));
             OnPropertyChanged(nameof(Name));
         }
@@ -75,7 +75,7 @@ public partial class Store : PropertyChange
     [NotMapped]
     public string Name
     {
-        get { return $"{cityStore} {streetStore} {houseStore} {numderStore}"; }
+        get { return $"{cityStore} {streetStore} {houseStore} {numberStore}"; }
         set
         {
             string[] components = value.Split(' ');
@@ -84,7 +84,7 @@ public partial class Store : PropertyChange
                 cityStore = components[0];
                 streetStore = components[1];
                 houseStore = components[2];
-                numderStore = components[3];
+                numberStore = components[3];
                 OnPropertyChanged(nameof(Name));
             }
         }

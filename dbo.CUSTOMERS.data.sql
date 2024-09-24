@@ -1,0 +1,12 @@
+﻿SET IDENTITY_INSERT [dbo].[CUSTOMERS] ON
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (1, N'Иван', N'Петров', N'ivan.petrov@gmail.com', N'p@ssw0rd1!')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (2, N'Мария', N'Сидорова', N'maria.sidorova@yandex.ru', N'Secur3P@$$')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (3, N'Сергей', N'Иванов', N'sergey.ivanov@mail.ru', N'D1ff1cultP@ss!')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (4, N'Анна', N'Кузнецова', N'anna.kuznetsova@outlook.com', N'Str0ngP@55word')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (5, N'Михаил', N'Попов', N'mikhail.popov@inbox.ru', N'P@ssw0rd!23')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (6, N'Екатерина', N'Смирнова', N'ekaterina.smirnova@bk.ru', N'S@f3P@55w0rd')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (7, N'Олег', N'Васильев', N'oleg.vasiliev@list.ru', N'P@ssw0rd&Secur1ty')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (8, N'Дарья', N'Соколова', N'darya.sokolova@rambler.ru', N'P@55C0d3!')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (9, N'Андрей', N'Михайлов', N'andrey.mikhaylov@yahoo.com', N'P@ssw0rd*2024')
+INSERT INTO [dbo].[CUSTOMERS] ([ID_CUSTOMER], [NAME_CUSTOMER], [FAMILY_CUSTOMER], [EMAIL_CUSTOMER], [PASSWORD_CUSTOMER]) VALUES (10, N'Виктория', N'Новикова', N'viktoria.novikova@gmail.com', N'R0bustP@55!')
+SET IDENTITY_INSERT [dbo].[CUSTOMERS] OFF

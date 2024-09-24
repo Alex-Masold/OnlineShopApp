@@ -1,13 +1,6 @@
 ﻿using OnlineShop.Models.Base;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Diagnostics.Tracing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OnlineShopApp.Models;
 public class OrderStatus : PropertyChange
@@ -15,14 +8,14 @@ public class OrderStatus : PropertyChange
     [Key]
     public int IdStatus { get; set; }
 
-    private string? status;
-    public string? Status 
+    private string? nameStatus;
+    public string? NameStatus 
     { 
-        get { return status; }
+        get { return nameStatus; }
         set
         {
-            status = value;
-            OnPropertyChanged(nameof(Status));
+            nameStatus = value;
+            OnPropertyChanged(nameof(NameStatus));
             OnPropertyChanged(nameof(Name));
         }
     }
@@ -31,13 +24,13 @@ public class OrderStatus : PropertyChange
     [NotMapped]
     public string Name
     {
-        get { return $"{IdStatus} {status}"; }
+        get { return $"{IdStatus} {nameStatus}"; }
         set
         {
             string[] components = value.Split(' ');
             if (components.Length == 2)
             {
-                status = components[1];
+                nameStatus = components[1];
                 OnPropertyChanged(nameof(Name));
             }
         }

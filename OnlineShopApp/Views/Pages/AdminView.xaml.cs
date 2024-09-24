@@ -1,4 +1,5 @@
 ﻿using OnlineShop.ViewModel;
+using OnlineShopApp.Views.Controls;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,10 +22,12 @@ namespace OnlineShop.Views.Pages
     /// </summary>
     public partial class AdminView : Page
     {
+
         public AdminView()
         {
             InitializeComponent();
-            DataContext = new AdminViewModel();
+            AdminViewModel viewModel = new AdminViewModel(Notification);
+            DataContext = viewModel;
         }
     }
 }
